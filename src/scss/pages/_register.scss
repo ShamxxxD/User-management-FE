@@ -1,0 +1,42 @@
+@import '../../scss/base/variables';
+
+.register-container {
+    background-color: $light-gray-color;
+
+    .register-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 8rem 0rem;
+
+        .auth-image {
+            max-height: 60rem;
+            border-radius: 1rem 0 0 1rem;
+        }
+
+        .register-form-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            padding: 3rem;
+            background: $white-color;
+            border-radius: 0 1rem 1rem 0;
+
+            height: 60rem;
+
+            .register-form-title {
+                margin-bottom: 3rem;
+            }
+
+            .login-recommend {
+                text-align: center;
+                a {
+                    color: $main-color;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
