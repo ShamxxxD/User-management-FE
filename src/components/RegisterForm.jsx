@@ -19,6 +19,9 @@ const RegisterFrom = () => {
       const createUser = async () => {
          try {
             if (formValues) {
+               //TODO Create a function wrapper Axios
+               //TODO view more: https://dev.to/nilanth/how-to-use-axios-in-an-optimized-and-scalable-way-with-react-518n
+               //TODO view more: https://blog.prototyp.digital/easier-api-calls-with-a-wrapper-around-axios/
                const response = await Axios.post(registerRoute, {
                   username: formValues.username,
                   email: formValues.email,
@@ -40,6 +43,7 @@ const RegisterFrom = () => {
    }, [formValues]);
 
    const handleRegister = values => {
+      //TODO Lean formik to handle form https://formik.org/docs/overview
       setLoading(true);
       setShowMassage(false);
       setDisableBtn(true);
