@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerRoute } from '~/utils/APIRoutes';
-import Axios from 'axios';
+import { postRequest } from '~/utils/axiosInstance';
 
 const RegisterFrom = () => {
    const navigate = useNavigate();
@@ -19,7 +19,7 @@ const RegisterFrom = () => {
       const createUser = async () => {
          try {
             if (formValues) {
-               const response = await Axios.post(registerRoute, {
+               const response = await postRequest('auth/register', {
                   username: formValues.username,
                   email: formValues.email,
                   password: formValues.password,
@@ -48,7 +48,7 @@ const RegisterFrom = () => {
          setFormValues(values);
          setShowMassage(true);
          setDisableBtn(false);
-      }, 3000);
+      }, 2000);
    };
 
    return (

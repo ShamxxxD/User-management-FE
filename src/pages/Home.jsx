@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getRequest, deleteRequest } from '~/utils/axiosInstance';
 import { getAllUsersRoute, deleteUserRoute } from '~/utils/APIRoutes';
 import {
    AppstoreOutlined,
@@ -57,7 +57,7 @@ function Home() {
       const getAllUsers = async () => {
          try {
             const accessToken = localStorage.getItem('accessToken');
-            const response = await axios.get(getAllUsersRoute, {
+            const response = await getRequest(getAllUsersRoute, {
                headers: {
                   token: accessToken,
                },
@@ -79,9 +79,9 @@ function Home() {
          onOk: async () => {
             try {
                const accessToken = localStorage.getItem('accessToken');
-               const response = await axios.post(`${deleteUserRoute}/${userId}`, {
+               const response = await deleteRequest(`${deleteUserRoute}/${userId}`, {
                   headers: {
-                     token: `BEARER ${accessToken}`,
+                     Authorization: `Bearer ${accessToken}`,
                   },
                });
             } catch (error) {
@@ -90,6 +90,7 @@ function Home() {
          },
       });
    };
+
    return (
       <Layout hasSider>
          <Sider

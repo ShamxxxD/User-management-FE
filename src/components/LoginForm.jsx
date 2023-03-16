@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input, Spin } from 'antd';
 import { useState, useEffect } from 'react';
 import { loginRoute } from '~/utils/APIRoutes';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { postRequest } from '~/utils/axiosInstance';
 
 const LoginForm = () => {
    const navigate = useNavigate();
@@ -25,20 +25,22 @@ const LoginForm = () => {
          setFormValues(values);
          setShowMassage(true);
          setDisableBtn(false);
-      }, 3000);
+      }, 1000);
    };
 
    useEffect(() => {
       if (formValues) {
          const loginUser = async () => {
             try {
-               const response = await axios.post(loginRoute, {
+               const response = await postRequest(loginRoute, {
                   username: formValues.username,
                   password: formValues.password,
                });
+
                setLoading(false);
                console.log(response);
                setMassage(response.data.msg);
+
                if (response.data.status === true) {
                   localStorage.setItem('accessToken', response.data.accessToken);
 
