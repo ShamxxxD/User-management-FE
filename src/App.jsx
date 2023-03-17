@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes';
-import Header from './layouts/Header';
+import Header from '~/layouts/Header';
 import Footer from '~/layouts/Footer';
 
 function App() {
