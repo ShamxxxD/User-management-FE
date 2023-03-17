@@ -19,17 +19,18 @@ const RegisterFrom = () => {
       const createUser = async () => {
          try {
             if (formValues) {
-               const response = await postRequest('auth/register', {
+               const response = await postRequest(registerRoute, {
                   username: formValues.username,
                   email: formValues.email,
                   password: formValues.password,
                });
                setLoading(false);
                setMassage(response.data.msg);
+               setShowMassage(true);
 
-               if (response.data.status === true) {
-                  navigate('/auth/login');
-               }
+               // if (response.data.status === true) {
+               //    navigate('/auth/login');
+               // }
             }
          } catch (error) {
             console.log(error);
@@ -46,9 +47,8 @@ const RegisterFrom = () => {
 
       setTimeout(() => {
          setFormValues(values);
-         setShowMassage(true);
          setDisableBtn(false);
-      }, 2000);
+      }, 0);
    };
 
    return (

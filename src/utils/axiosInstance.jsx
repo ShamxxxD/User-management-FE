@@ -10,12 +10,12 @@ axiosClient.defaults.headers = {
 };
 
 //All request will wait 2 seconds before timeout
-axiosClient.defaults.timeout = 2000;
+axiosClient.defaults.timeout = 5000;
 
 axiosClient.defaults.withCredentials = true;
 
-async function getRequest(URL) {
-   const response = await axiosClient.get(`/${URL}`);
+async function getRequest(URL, payload) {
+   const response = await axiosClient.get(`/${URL}`, payload);
    return response;
 }
 
@@ -29,8 +29,8 @@ async function patchRequest(URL, payload) {
    return response;
 }
 
-async function deleteRequest(URL) {
-   const response = await axiosClient.delete(`/${URL}`);
+async function deleteRequest(URL, payload) {
+   const response = await axiosClient.delete(`/${URL}`, payload);
    return response;
 }
 

@@ -16,14 +16,12 @@ const LoginForm = () => {
    const [disableBtn, setDisableBtn] = useState(false);
 
    const handleLogin = values => {
-      console.log('Received values of form: ', values);
       setLoading(true);
       setShowMassage(false);
       setDisableBtn(true);
 
       setTimeout(() => {
          setFormValues(values);
-         setShowMassage(true);
          setDisableBtn(false);
       }, 1000);
    };
@@ -38,8 +36,8 @@ const LoginForm = () => {
                });
 
                setLoading(false);
-               console.log(response);
                setMassage(response.data.msg);
+               setShowMassage(true);
 
                if (response.data.status === true) {
                   localStorage.setItem('accessToken', response.data.accessToken);
