@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
    AppstoreOutlined,
    BarChartOutlined,
@@ -9,7 +9,7 @@ import {
    UserOutlined,
    VideoCameraOutlined,
 } from '@ant-design/icons';
-
+import { useNavigate } from 'react-router-dom';
 import UsersTable from '~/components/UsersTable';
 import { Layout, Menu, theme } from 'antd';
 const { Content, Sider } = Layout;
@@ -30,6 +30,15 @@ const items = [
 }));
 
 function Home() {
+   const navigate = useNavigate();
+
+   useEffect(() => {
+      const isLogin = localStorage.getItem('accessToken');
+      if (!isLogin) {
+         navigate('/auth/login');
+      }
+   });
+
    const {
       token: { colorBgContainer },
    } = theme.useToken();
