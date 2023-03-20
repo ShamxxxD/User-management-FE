@@ -1,34 +1,37 @@
 import '~/scss/layouts/_header.scss';
-
 import { Layout, Space } from 'antd';
 import LoginButton from '~/components/LoginButton';
 import SignUpButton from '~/components/SignUpButton';
 import LogoutButton from '~/components/LogoutButton';
-import { useState, useEffect } from 'react';
+import UserAvatar from '~/components/UserAvatar';
+import jwtDecode from 'jwt-decode';
 const { Header } = Layout;
 
-function AppHeader() {
-   const [accessToken, setAccessToken] = useState(false);
-   const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
+function AppHeader({ isLogin }) {
+    const accessToken = localStorage.getItem('accessToken');
+    let userInfo;
+    if (accessToken) {
+        userInfo = jwtDecode(accessToken);
+    }
 
-   useEffect(() => {
-      setAccessToken(!!accessTokenFromLocalStorage);
-   }, [accessToken]);
-
-   return (
-      <Header className='header'>
-         {!accessToken ? (
-            <Space className='header-btn-wrapper'>
-               <LoginButton />
-               <SignUpButton />
-            </Space>
-         ) : (
-            <Space className='header-btn-wrapper'>
-               <LogoutButton />
-            </Space>
-         )}
-      </Header>
-   );
+    return (
+        <Header className='header'>
+            {!isLogin ? (
+                <Space className='header-btn-wrapper'>
+                    <LoginButton />
+                    <SignUpButton />
+                </Space>
+            ) : (
+                <Space className='header-btn-wrapper'>
+                    <div>
+                        {userInfo.username}
+                        <UserAvatar avatar={userInfo.avatar} />
+                    </div>
+                    <LogoutButton />
+                </Space>
+            )}
+        </Header>
+    );
 }
 
 export default AppHeader;

@@ -5,7 +5,6 @@ import { deleteUserRoute } from '~/utils/APIRoutes';
 import { EditOutlined, DeleteOutlined, UserOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
 
 import { Table, Space, Modal, Input } from 'antd';
-import jwtDecode from 'jwt-decode';
 
 const { Column } = Table;
 

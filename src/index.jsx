@@ -3,26 +3,20 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { StoreProvider } from './store';
 import 'antd/dist/reset.css';
 import './scss/states/_all.states.scss';
 import 'antd/dist/reset.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-   // <React.StrictMode>
-   <BrowserRouter>
-      {/* <ConfigProvider
-                theme={{
-                    token: {
-                        fontSize: '16',
-                        fontFamily: 'Quicksand',
-                    },
-                }}
-            > */}
-      <App />
-      {/* </ConfigProvider> */}
-   </BrowserRouter>
-   /* </React.StrictMode> */
+    // <React.StrictMode>
+    <StoreProvider>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </StoreProvider>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
