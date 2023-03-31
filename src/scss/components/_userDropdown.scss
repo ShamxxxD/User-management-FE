@@ -1,0 +1,14 @@
+@import '../base/variables';
+
+.user-drop-down {
+    &:hover {
+        cursor: pointer;
+    }
+    .user-name {
+        color: $white-color;
+        margin-right: 1rem;
+        &:hover {
+            color: $grey-color;
+        }
+    }
+}

@@ -1,13 +1,14 @@
 @import '../base/variables';
 
 .header {
-   color: $main-color;
-   position: fixed;
-   top: 0;
-   width: 100%;
-   z-index: 10;
-   padding-left: 30rem;
-
-   .header-btn-wrapper {
-   }
+    .header-nav {
+        .ant-menu-item-icon {
+            font-size: 2rem;
+        }
+        .ant-menu-item {
+            font-size: 2rem;
+            height: 6rem;
+            line-height: 6rem;
+        }
+    }
 }

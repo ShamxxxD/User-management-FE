@@ -1,46 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-
+@import './variables';
+//     xs: '480px',
+//     sm: '576px',
+//     md: '768px',
+//     lg: '992px',
+//     xl: '1200px',
+//     xxl: '1600px',
 * {
-     margin: 0;
-     padding: 0;
-     box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
 }
 
 html {
-     font-size: 62.5%;
-     box-sizing: border-box;
+    font-size: 62.5%;
+    box-sizing: border-box;
 }
 
 body {
-     font-size: 1.6rem;
-     margin: 0;
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
-     font-family: 'Quicksand', sans-serif;
-     font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
 }
 
 a {
-     text-decoration: none !important;
-     font-family: inherit;
-     color: inherit;
+    text-decoration: none !important;
+    font-family: inherit;
+    color: inherit;
 }
 
 li {
-     list-style-type: none;
+    list-style-type: none;
 }
 
 .container {
-     width: 100vw;
+    width: 100vw;
+    background-color: $white-color;
 }
 
 .container-fluid {
-     max-width: 120rem;
-     margin: 0 auto;
-     @media screen and (max-width: 120rem) {
-          padding: 0 1rem;
-     }
-     @media screen and (min-width: 180rem) {
-          max-width: 80vw;
-     }
+    max-width: 130rem;
+    margin: 0 auto;
+    background-color: $white-color;
+    @media screen and (max-width: 130rem) {
+        padding: 0 1rem;
+    }
+    @media screen and (min-width: 180rem) {
+        max-width: 80vw;
+    }
 }

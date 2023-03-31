@@ -1,8 +1,13 @@
-export const isUserLogin = payload => {
-    const currentUserStatus = payload === true ? 'log in' : 'log out';
-
+export const setUser = payload => {
     return {
-        type: currentUserStatus,
+        type: 'set user',
+        payload,
+    };
+};
+
+export const setConversationPartner = payload => {
+    return {
+        type: 'set conversation partner',
         payload,
     };
 };

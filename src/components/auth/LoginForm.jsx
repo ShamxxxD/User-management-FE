@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import '~/scss/components/_loginForm.scss';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { Button, Checkbox, Form, Input, Spin } from 'antd';
 import { useState, useEffect } from 'react';
 import { loginRoute } from '~/utils/APIRoutes';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { postRequest } from '~/utils/axiosInstance';
 
 import { useStore } from '~/store';
@@ -47,7 +49,7 @@ const LoginForm = () => {
                         localStorage.setItem('accessToken', response.data.accessToken);
 
                         setTimeout(() => {
-                            dispatch(actions.isUserLogin(true));
+                            dispatch(actions.setUser(response.data.user));
                             navigate('/');
                         }, 2000);
                     }
@@ -103,9 +105,9 @@ const LoginForm = () => {
                     <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
-                <a className='login-form-forgot' href=''>
+                <Link className='login-form-forgot' to='#'>
                     Forgot password
-                </a>
+                </Link>
             </Form.Item>
 
             <Form.Item>

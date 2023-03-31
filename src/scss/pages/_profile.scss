@@ -1,0 +1,69 @@
+@import '../../scss/base/_variables.scss';
+
+// .container {
+//     padding-left: 20rem;
+//     background-color: #f5f5f5;
+//     height: 100vh;
+//     padding: 2rem;
+
+//     .breadcrumb {
+//         position: fixed;
+//         top: 1rem;
+//         left: 22rem;
+//         right: 2rem;
+
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+
+//         border-radius: 1rem;
+//         background-color: $white-color;
+//         padding: 1rem 2rem;
+//         margin-top: 1rem;
+
+//         .user-name {
+//             color: $black-color;
+//             &:hover {
+//                 color: $grey-color;
+//             }
+//         }
+//     }
+
+//     .content {
+//         margin-top: 8rem;
+
+//         .form-container {
+//             display: flex;
+//             justify-content: center;
+//             flex-direction: column;
+//             align-items: center;
+
+//             .form-wrapper {
+//                 background-color: $white-color;
+
+//                 padding: 3rem;
+//                 border-radius: 1rem;
+//                 min-width: 60rem;
+//                 max-width: 120rem !important;
+
+//                 h3 {
+//                     text-align: center;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+.user-info-container {
+    padding: 0 1.5rem;
+    .user-avatar {
+        background: #fff;
+        margin-top: -50%;
+        padding: 0.4rem;
+        + .ant-image-mask {
+            border-radius: 10rem;
+            margin-top: -50%;
+            inset: 0.3rem;
+        }
+    }
+}

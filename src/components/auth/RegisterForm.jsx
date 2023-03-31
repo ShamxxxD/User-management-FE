@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Checkbox, Form, Input, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaLock } from 'react-icons/fa';
@@ -28,9 +29,9 @@ const RegisterFrom = () => {
                     setMassage(response.data.msg);
                     setShowMassage(true);
 
-                    // if (response.data.status === true) {
-                    //    navigate('/auth/login');
-                    // }
+                    if (response.data.status === true) {
+                        navigate('/auth/login');
+                    }
                 }
             } catch (error) {
                 console.log(error);

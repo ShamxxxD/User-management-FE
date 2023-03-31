@@ -1,17 +1,19 @@
 const initState = {
-    isLogin: false,
+    user: {},
+    conversationPartner: {},
 };
 function reducer(state, action) {
     switch (action.type) {
-        case 'log in':
+        case 'set user':
             return {
                 ...state,
-                isLogin: action.payload,
+                user: action.payload,
             };
-        case 'log out':
+
+        case 'set conversation partner':
             return {
                 ...state,
-                isLogin: action.payload,
+                conversationPartner: action.payload,
             };
         default:
             return new Error('Invalid action...');

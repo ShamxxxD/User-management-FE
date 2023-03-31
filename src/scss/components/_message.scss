@@ -1,0 +1,32 @@
+@import '../base/variables';
+
+.message-item {
+    margin-bottom: 0.3rem;
+    .own-message {
+        background-color: #ea1414;
+        padding: 0.8rem 1.5rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .content {
+            color: $white-color;
+            margin-bottom: 0;
+        }
+    }
+
+    .message {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: $main-color;
+        padding: 0.8rem 2rem;
+        border-radius: 1rem;
+
+        .content {
+            color: $white-color;
+            margin-bottom: 0;
+        }
+    }
+}
