@@ -3,7 +3,6 @@ import { Button, Checkbox, Form, Input, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { registerRoute } from '~/utils/APIRoutes';
 import { postRequest } from '~/utils/axiosInstance';
 
 const RegisterFrom = () => {
@@ -20,7 +19,7 @@ const RegisterFrom = () => {
         const createUser = async () => {
             try {
                 if (formValues) {
-                    const response = await postRequest(registerRoute, {
+                    const response = await postRequest('users/register', {
                         username: formValues.username,
                         email: formValues.email,
                         password: formValues.password,

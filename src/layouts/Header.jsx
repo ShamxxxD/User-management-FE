@@ -29,10 +29,10 @@ function AppHeader() {
 
     const items = [
         getItem(<Link to='/'>Home</Link>, '1', <HomeOutlined />),
-        getItem(<Link to='/notifications'>Notifications</Link>, '2', <BellOutlined />),
+        // getItem(<Link to='/notifications'>Notifications</Link>, '2', <BellOutlined />),
         getItem(<Link to='/messages'>Messages</Link>, '3', <MailOutlined />),
         getItem(<Link to='/profile'>Profile</Link>, '4', <UserOutlined />),
-        getItem(<Link to='/weather'>Weather</Link>, '5', <CloudOutlined />),
+        // getItem(<Link to='/weather'>Weather</Link>, '5', <CloudOutlined />),
     ];
 
     return (
@@ -42,7 +42,7 @@ function AppHeader() {
                     <Space size='small' align='center'>
                         <Image src={logo} alt='logo' className='logo' preview={false} width='30px' />
                         <Title className='logo-box-text' level={1} style={{ fontSize: '2rem', marginBottom: 0 }}>
-                            Vibrant
+                            Twitter Clone
                         </Title>
                     </Space>
                 </Col>
@@ -68,7 +68,7 @@ function AppHeader() {
                         shape='round'
                         icon={<ThunderboltOutlined />}
                     >
-                        Make noise
+                        Tweet
                     </Button>
                 </Col>
             </Row>

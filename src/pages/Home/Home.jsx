@@ -22,7 +22,6 @@ function Home() {
     const getAllPosts = async () => {
         try {
             const response = await getRequest('posts');
-            console.log(response.data);
             setPosts(response.data.posts);
         } catch (error) {
             console.log(error);

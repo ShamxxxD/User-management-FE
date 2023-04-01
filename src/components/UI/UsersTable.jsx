@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getRequest, patchRequest, deleteRequest } from '~/utils/axiosInstance';
 import axiosClient from '~/utils/axiosInstance';
-import { deleteUserRoute } from '~/utils/APIRoutes';
 import { EditOutlined, DeleteOutlined, UserOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
 import { Table, Space, Modal, Input } from 'antd';
 
@@ -93,7 +92,7 @@ function UsersTable() {
             onOk: async () => {
                 try {
                     const accessToken = localStorage.getItem('accessToken');
-                    await deleteRequest(`${deleteUserRoute}/${userId}`, {
+                    await deleteRequest(`users/${userId}`, {
                         headers: {
                             token: `Bearer ${accessToken}`,
                         },

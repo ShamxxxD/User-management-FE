@@ -62,7 +62,7 @@ function TweetItem({ post, onGetPosts }) {
             <Row className='tweet-item-content'>
                 <Col span={20}>
                     <Space size='small'>
-                        <Link to='/me'>{post?.author?.displayName}</Link>
+                        <Link to='/profile'>{post?.author?.displayName}</Link>
                         <Text type='secondary'>@{post?.author?.username}</Text>
                         <Text type='secondary'>-</Text>
                         <Text type='secondary'>{post?.createdAt}</Text>

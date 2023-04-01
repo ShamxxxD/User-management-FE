@@ -4,10 +4,8 @@ import '~/scss/components/_loginForm.scss';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { Button, Checkbox, Form, Input, Spin } from 'antd';
 import { useState, useEffect } from 'react';
-import { loginRoute } from '~/utils/APIRoutes';
 import { Link, useNavigate } from 'react-router-dom';
 import { postRequest } from '~/utils/axiosInstance';
-
 import { useStore } from '~/store';
 import { actions } from '~/store';
 
@@ -36,7 +34,7 @@ const LoginForm = () => {
         if (formValues) {
             const loginUser = async () => {
                 try {
-                    const response = await postRequest(loginRoute, {
+                    const response = await postRequest('auth/login', {
                         username: formValues.username,
                         password: formValues.password,
                     });
