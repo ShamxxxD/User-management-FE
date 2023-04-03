@@ -5,21 +5,23 @@ import Login from '~/pages/Auth/Login';
 import Profile from '~/pages/Profile/Profile';
 import ChangePassword from '~/pages/Profile/ChangePassword';
 import Message from '~/pages/Message/Message';
+import TweetDetail from '~/pages/TweetDetail/TweetDetail';
 
 export const publicRoutes = [
     { path: '/auth/register', component: Register },
     { path: '/auth/login', component: Login },
+    { path: '/posts/:id', component: TweetDetail },
 ];
 export const privateRoutes = [
     { path: '/', component: Home },
     { path: '/messages', component: Message },
     { path: '/admin/users', component: AdminUserDashboard },
     {
-        path: '/profile',
+        path: '/profile/:id',
         component: Profile,
     },
     {
-        path: '/profile/change-password',
+        path: '/profile/:id/change-password',
         component: ChangePassword,
     },
 ];

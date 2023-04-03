@@ -5,10 +5,16 @@ import ChangePasswordForm from '~/components/User/ChangePasswordForm';
 import LayOutNoHeader from '~/layouts/LayOutNoHeader';
 import AppBreadcrumb from '~/components/UI/Breadcrumb';
 import { AppstoreOutlined } from '@ant-design/icons';
-import { Layout, Menu, message, Typography } from 'antd';
-import UserDropDown from '~/components/User/UserDropDown';
+import { Layout, message, Typography, Segmented, Row, Col } from 'antd';
 import { patchRequest } from '~/utils/axiosInstance';
 import { useStore } from '~/store';
+import PageTitle from '~/components/UI/PageTitle';
+import MainLayout from '~/layouts/MainLayout';
+import InputNewPost from '~/components/UI/InputNewPost';
+import UserAvatar from '~/components/User/UserAvatar';
+import TweetItem from '~/components/UI/TweetItem';
+import { getRequest } from '~/utils/axiosInstance';
+import RightSidebar from '~/components/UI/RightSidebar';
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -58,43 +64,20 @@ function ChangePassword() {
         }
     };
     return (
-        <LayOutNoHeader>
-            <Sider
-                style={{
-                    overflow: 'auto',
-                    height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                }}
-            >
-                <div
-                    style={{
-                        height: 32,
-                        margin: 16,
-                        background: 'rgba(0, 0,0, 0.2)',
-                    }}
-                />
-
-                <Menu theme='dark' mode='vertical' defaultSelectedKeys={['1']} items={items} />
-            </Sider>
-
-            <div className='container'>
-                <div className='breadcrumb'>
-                    <AppBreadcrumb />
-                    <UserDropDown />
-                </div>
-                <div className='content'>
-                    <div className='form-container'>
-                        <div className='form-wrapper'>
-                            <Title level={3}>Change password</Title>
-                            <ChangePasswordForm handleSubmit={handleSubmit} loading={loading} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </LayOutNoHeader>
+        <MainLayout>
+            <Row>
+                <Col className='content-container' span={24}>
+                    <Row>
+                        <Col span={24} className='heading-content'>
+                            <PageTitle>Change password</PageTitle>
+                        </Col>
+                    </Row>
+                    <Col span={24} style={{ padding: ' 1rem 5rem' }}>
+                        <ChangePasswordForm handleSubmit={handleSubmit} loading={loading} />
+                    </Col>
+                </Col>
+            </Row>
+        </MainLayout>
     );
 }
 

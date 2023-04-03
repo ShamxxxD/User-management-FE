@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import '~/scss/components/_conversation.scss';
 import { useState, useEffect } from 'react';
 import { getRequest } from '~/utils/axiosInstance';
@@ -16,6 +17,7 @@ function Conversation({ conversation, currentUser, onSetCurrentChat }) {
         const getConversationUsersInfo = async () => {
             try {
                 const response = await getRequest(`users/${friendId}`);
+                console.log('response :', response.data);
                 setConversationUser(response.data.user);
             } catch (error) {
                 console.log(error);
@@ -29,20 +31,27 @@ function Conversation({ conversation, currentUser, onSetCurrentChat }) {
             <Row
                 className='conversation-item'
                 onClick={() => {
+                    console.log('conversationUser :', conversationUser);
                     dispatch(actions.setConversationPartner(conversationUser));
                     onSetCurrentChat(conversation._id);
                 }}
             >
                 <Space>
-                    <Col>
-                        <Avatar src={<img src={conversationUser?.avatar} alt='avatar' />} size={50} />
-                    </Col>
-                    <Col>
-                        <Title level={4} style={{ marginBottom: 0 }} className='conversation-user-name'>
-                            {conversationUser?.displayName || conversationUser?.username}
-                        </Title>
-                        About 2 minutes ago
-                    </Col>
+                    {conversationUser ? (
+                        <div>
+                            <Col>
+                                <Avatar src={<img src={conversationUser?.avatar} alt='avatar' />} size={50} />
+                            </Col>
+                            <Col>
+                                <Title level={4} style={{ marginBottom: 0 }} className='conversation-user-name'>
+                                    {conversationUser?.displayName || conversationUser?.username}
+                                </Title>
+                                About 2 minutes ago
+                            </Col>
+                        </div>
+                    ) : (
+                        'User has been deleted'
+                    )}
                 </Space>
             </Row>
         </>

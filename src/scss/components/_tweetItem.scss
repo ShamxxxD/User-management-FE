@@ -1,61 +1,118 @@
 @import '../base/variables';
 
 .tweet-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    transition: all 0.3s;
-    width: 100%;
-    margin: 0;
+    padding: 3rem 1.5rem;
     border-top: 1px solid $light-grey-color;
     border-bottom: 1px solid $light-grey-color;
+    .tweet-content-wrapper {
+        display: flex;
+        gap: 1rem;
+        transition: all 0.3s;
+        width: 100%;
+        margin: 0;
 
-    &:hover {
-        background-color: $light-grey-color;
-    }
-    .tweet-item-avatar {
-        min-width: 5rem;
-    }
+        .tweet-item-avatar {
+            min-width: 5rem;
+        }
 
-    .tweet-item-content {
-        .tweet-actions-modal {
-            position: absolute;
-            z-index: 10;
-            top: 4rem;
-            background: $white-color;
-            border-radius: 1rem;
-            right: 0;
-            width: max-content;
-            box-shadow: 0 0 1rem 0 $grey-color;
-            overflow: hidden;
+        .tweet-item-content {
+            .tweet-actions-modal {
+                position: absolute;
+                z-index: 10;
+                top: 4rem;
+                background: $white-color;
+                border-radius: 1rem;
+                right: 0;
+                width: max-content;
+                box-shadow: 0 0 1rem 0 $grey-color;
+                overflow: hidden;
 
-            .tweet-action-item {
-                padding: 1.5rem 3rem;
+                .tweet-action-item {
+                    padding: 1.5rem 3rem;
 
-                &:hover {
-                    cursor: pointer;
-                    background-color: $light-grey-color;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $light-grey-color;
+                    }
                 }
             }
-        }
 
-        .comment-icon {
-            font-size: 2rem;
-            padding: 1rem;
-            border-radius: 5rem;
-            &:hover {
-                background: #e6f4ff;
-                cursor: pointer;
+            .tweet-item-icon-wrapper {
+                display: flex;
+                align-items: center;
+
+                .comment-icon {
+                    font-size: 2rem;
+                    padding: 1rem;
+                    border-radius: 5rem;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        background: #e6f4ff;
+                        cursor: pointer;
+                        color: $main-color;
+
+                        + span {
+                            color: $main-color;
+                        }
+                    }
+                    + span {
+                        transition: all 0.3s;
+                    }
+                }
+
+                .like-icon {
+                    font-size: 2rem;
+                    padding: 1rem;
+                    border-radius: 5rem;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        background: #ffe1ef;
+                        cursor: pointer;
+                        color: #ff4099;
+
+                        + span {
+                            color: #ff4099;
+                        }
+                    }
+
+                    + span {
+                        transition: all 0.3s;
+                    }
+                }
+
+                .like-icon-filled {
+                    font-size: 2rem;
+                    padding: 1rem;
+                    border-radius: 5rem;
+                    transition: all 0.3s;
+                    color: #ff4099;
+
+                    &:hover {
+                        background: #ffe1ef;
+                        cursor: pointer;
+                    }
+
+                    + span {
+                        color: #ff4099;
+                    }
+                }
+            }
+
+            .tweet-item-image {
+                min-width: 70%;
             }
         }
+    }
 
-        .like-icon {
-            font-size: 2rem;
-            padding: 1rem;
-            border-radius: 5rem;
-            &:hover {
-                background: #ffe1ef;
-                cursor: pointer;
+    .tweet-comment-wrapper {
+        .ant-list-item-meta-content {
+            background: #f8f8f8;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            .ant-list-item-meta-description {
+                color: #333;
             }
         }
     }

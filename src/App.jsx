@@ -1,15 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import jwtDecode from 'jwt-decode';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, redirect } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from './routes';
-import { useStore } from './store';
 import { actions } from '~/store';
 import { useEffect } from 'react';
+import { useStore } from './store';
 
 function App() {
     const navigate = useNavigate();
-    const [state, dispatch] = useStore();
+    const [{ user }, dispatch] = useStore();
+
+    const isLogin = Object.keys(user).length === 0 && user.constructor === Object;
 
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
@@ -30,7 +32,7 @@ function App() {
 
                 {privateRoutes.map((route, index) => {
                     const Page = route.component;
-                    return <Route key={index} path={route.path} element={<Page />} />;
+                    return !isLogin && <Route key={index} path={route.path} element={<Page />} />;
                 })}
             </Routes>
         </div>

@@ -1,14 +1,33 @@
 @import '../base/variables';
 
 .header {
-    .header-nav {
-        .ant-menu-item-icon {
-            font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem 0rem;
+
+    .header-top-container {
+        gap: 3rem;
+        .logo-wrapper {
         }
-        .ant-menu-item {
-            font-size: 2rem;
-            height: 6rem;
-            line-height: 6rem;
+        .menu-wrapper {
+            .header-menu {
+                .ant-menu-item-icon {
+                    font-size: 2rem;
+                }
+                .ant-menu-item {
+                    font-size: 2rem;
+                    height: 6rem;
+                    line-height: 6rem;
+                }
+            }
         }
+    }
+
+    .account-wrapper {
+        background: $light-grey-color;
+        padding: 1rem;
+        border-radius: 1rem;
     }
 }

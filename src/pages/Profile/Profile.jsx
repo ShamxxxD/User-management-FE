@@ -7,35 +7,72 @@ import { getRequest, patchRequest } from '~/utils/axiosInstance';
 import { useStore } from '~/store';
 import { actions } from '~/store';
 import { CalendarOutlined } from '@ant-design/icons';
-import TweetItem from '~/components/UI/TweetItem';
-import { Image, Row, Col, Typography, Button, Modal, message, Segmented } from 'antd';
+import { Image, Row, Col, Typography, Button, Modal, message, Tabs } from 'antd';
 import { useState, useEffect } from 'react';
 import RightSidebar from '~/components/UI/RightSidebar';
+import { useParams } from 'react-router-dom';
+import UserPosts from '~/components/User/UserPosts';
+
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import FriendList from '~/components/User/FriendList';
+import FriendRequestList from '~/components/User/FriendRequestList';
+
+dayjs.extend(relativeTime);
+
 const { Title, Paragraph } = Typography;
 
 function Profile() {
+    const params = useParams();
+    const { id } = params;
+
     const [state, dispatch] = useStore();
-    const { user } = state;
+
+    const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
+
+    const [skip, setSkip] = useState(0);
+    const [limit, setLimit] = useState(5);
+
+    const [isShowLoadMorePosts, setIsShowLoadMorePosts] = useState(true);
+
     const [showEditInfoForm, setShowEditInfoForm] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const getMyPost = async () => {
-        const accessToken = localStorage.getItem('accessToken');
-        const response = await getRequest('posts/my-posts', {
-            headers: {
-                token: accessToken,
-            },
-            params: {
-                limit: 5,
-            },
-        });
-        setPosts(response.data.posts);
-    };
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await getRequest(`users/${id}`);
+                setUser(response.data.user);
+            } catch (error) {
+                console.log(' error:', error);
+            }
+        };
+        fetchUser();
+    }, [id]);
 
     useEffect(() => {
-        getMyPost();
-    }, []);
+        const getUserPost = async () => {
+            try {
+                const response = await getRequest('posts/my-posts', {
+                    params: {
+                        _userId: id,
+                        _limit: limit,
+                        _skip: skip,
+                    },
+                });
+
+                if (response.data.posts.length < limit) {
+                    setIsShowLoadMorePosts(false);
+                }
+                const newPosts = posts.concat(response.data.posts);
+                setPosts(newPosts);
+            } catch (error) {
+                console.log(' error:', error);
+            }
+        };
+        getUserPost();
+    }, [id, limit, skip]);
 
     const handleFinish = async values => {
         try {
@@ -51,12 +88,30 @@ function Profile() {
         } catch (error) {
             setLoading(false);
             setShowEditInfoForm(false);
-            message.success('Update information failed!');
+            message.error('Update information failed!');
         }
     };
     const handleFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
     };
+
+    const items = [
+        {
+            key: '1',
+            label: `Tweets`,
+            children: <UserPosts posts={posts} isShowLoadMorePosts={isShowLoadMorePosts} setSkip={setSkip} />,
+        },
+        {
+            key: '2',
+            label: `Friends`,
+            children: <FriendList />,
+        },
+        {
+            key: '3',
+            label: `Friends request`,
+            children: <FriendRequestList />,
+        },
+    ];
 
     return (
         <MainLayout>
@@ -95,13 +150,13 @@ function Profile() {
                                         }}
                                     />
                                     <Title style={{ marginBottom: 0 }} level={3}>
-                                        {user.displayName}
+                                        {user?.displayName}
                                     </Title>
                                     <Paragraph italic type='secondary'>
-                                        @{user.username}
+                                        @{user?.username}
                                     </Paragraph>
                                     <Paragraph italic type='secondary'>
-                                        <CalendarOutlined /> {user.createdAt}
+                                        <CalendarOutlined /> Joined {dayjs(user?.createdAt).format('DD/MM/YYYY')}
                                     </Paragraph>
                                 </Col>
 
@@ -130,18 +185,14 @@ function Profile() {
                         </Col>
 
                         <Col span={24} style={{ marginBottom: '1.5rem' }}>
-                            <Segmented block options={['My posts', 'Following', 'Follower']} size='large' />
+                            <Tabs
+                                defaultActiveKey='1'
+                                items={items}
+                                size='large'
+                                centered
+                                onChange={item => console.log(item)}
+                            />
                         </Col>
-
-                        <Row>
-                            <Col span={24}>
-                                {Array.isArray(posts) &&
-                                    posts.length > 0 &&
-                                    posts.map(post => {
-                                        return <TweetItem key={post._id} post={post} />;
-                                    })}
-                            </Col>
-                        </Row>
                     </Row>
                 </Col>
                 <Col className='sidebar-container' sm={0} xl={9}>

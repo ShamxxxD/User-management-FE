@@ -1,27 +1,32 @@
 import '~/scss/layouts/_main.layout.scss';
-
-import { Layout, Space } from 'antd';
+import { Row, Col } from 'antd';
 import AppHeader from './Header';
-const { Content, Sider } = Layout;
-
 function MainLayout({ children }) {
     return (
-        <Layout className='container-fluid'>
-            <Sider
-                theme='light'
-                width={300}
+        <Row className='container-fluid main-layout'>
+            <Col
+                xs={0}
+                sm={0}
+                md={5}
+                lg={6}
+                xl={6}
                 style={{
+                    overflow: 'auto',
                     position: 'sticky',
-                    top: '0',
+                    zIndex: 100,
+                    top: 0,
+                    bottom: 0,
                     height: '100vh',
                     paddingRight: '2rem',
                 }}
             >
                 <AppHeader />
-            </Sider>
+            </Col>
 
-            <Content className='main-content'>{children}</Content>
-        </Layout>
+            <Col xs={24} sm={24} md={19} lg={18} xl={18} className='main-content'>
+                {children}
+            </Col>
+        </Row>
     );
 }
 

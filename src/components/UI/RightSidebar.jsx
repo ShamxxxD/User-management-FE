@@ -1,21 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import '~/scss/components/_rightSidebar.scss';
-import { Col, Row, Button, List, Skeleton, Empty, Avatar, Space } from 'antd';
+import { Col, Row, Button, List, Skeleton, Empty, Avatar } from 'antd';
 import Search from 'antd/es/input/Search';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { getRequest } from '~/utils/axiosInstance';
 import People from './People';
 import { Link } from 'react-router-dom';
 import Title from 'antd/es/typography/Title';
+import { useStore } from '~/store';
 
 function RightSidebar() {
     // Call api lấy users và lưu vào peoples
     const [peoples, setPeoples] = useState([]);
     const [page, setPage] = useState(1);
+    const [{ user }, dispatch] = useStore();
+    const currentUser = user;
 
     const [searchResult, setSearchResult] = useState([]);
 
-    const [addFriendLoading, setAddFriendLoading] = useState(false);
-    const [removeLoading, setRemoveLoading] = useState(false);
+    // const [addFriendLoading, setAddFriendLoading] = useState(false);
+    // const [removeLoading, setRemoveLoading] = useState(false);
 
     // loading list people u may know và loading của nút load more user
     const [initLoading, setInitLoading] = useState(true);
@@ -29,12 +34,6 @@ function RightSidebar() {
     // Tạo ref lấy tất cả số lượng users khi call API lần đầu
     // So sánh với số lượng users được get về
     // Nếu bằng thì tắt nút show more
-    const totalUserRef = useRef();
-    useEffect(() => {
-        if (peoples.length === totalUserRef.current) {
-            setDisableShowMore(true);
-        }
-    }, [peoples]);
 
     const onLoadMore = () => {
         setLoading(true);
@@ -43,11 +42,16 @@ function RightSidebar() {
         const getUserPagination = async () => {
             try {
                 const response = await getRequest(`users/pagination?page=${newPage}&limit=20`);
-                const newPeoplesList = peoples.concat(response.data.users);
+                const people = response.data.users.filter(user => user._id !== currentUser._id);
+                const newPeoplesList = peoples.concat(people);
 
                 setPage(newPage);
                 setPeoples(newPeoplesList);
                 setLoading(false);
+
+                if (response.data.users.length < 20) {
+                    setDisableShowMore(true);
+                }
                 window.dispatchEvent(new Event('resize'));
             } catch (error) {
                 console.log(error);
@@ -55,7 +59,6 @@ function RightSidebar() {
         };
         getUserPagination();
     };
-
     // disableShowMore luôn bằng fasle khi chưa hết danh sách users
     // khi click show more => loading = false => mất nút show more
     // có dữ liệu hiển thị lại
@@ -91,9 +94,10 @@ function RightSidebar() {
         const getUserPagination = async () => {
             try {
                 const response = await getRequest(`users/pagination?page=${page}&limit=20`);
-                totalUserRef.current = response.data.countTotalUsers;
+                const people = response.data.users.filter(user => user._id !== currentUser._id);
+
                 setInitLoading(false);
-                setPeoples(response.data.users);
+                setPeoples(people);
             } catch (error) {
                 console.log(error);
             }

@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { getRequest, patchRequest, deleteRequest } from '~/utils/axiosInstance';
 import axiosClient from '~/utils/axiosInstance';
 import { EditOutlined, DeleteOutlined, UserOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
-import { Table, Space, Modal, Input } from 'antd';
+import { Table, Space, Modal, Input, message } from 'antd';
+import dayjs from 'dayjs';
 
 const { Column } = Table;
 
@@ -26,7 +27,7 @@ function UsersTable() {
             username: user.username,
             email: user.email,
             phone: user.phone,
-            createdAt: user.createdAt,
+            createdAt: dayjs(user.createdAt).format('HH:mm DD/MM/YYYY'),
         };
     });
 
@@ -77,10 +78,14 @@ function UsersTable() {
                 }
             );
 
+            message.success('Edit user successfully');
+
             setOpenEditModal(false);
             getUserPagination();
         } catch (error) {
+            message.error('Edit user failed');
             console.log(error);
+            setOpenEditModal(false);
         }
     };
 
@@ -97,9 +102,11 @@ function UsersTable() {
                             token: `Bearer ${accessToken}`,
                         },
                     });
+                    message.success('Delete user successfully');
 
                     getUserPagination();
                 } catch (error) {
+                    message.error('Delete user error');
                     console.log(error);
                 }
             },
@@ -113,6 +120,9 @@ function UsersTable() {
     return (
         <Table
             dataSource={dataSource}
+            scroll={{
+                x: 1500,
+            }}
             loading={loading}
             pagination={{
                 pageSize: limit,
@@ -120,9 +130,10 @@ function UsersTable() {
                 onChange: (page, pageSize) => handlePaginationChange(page, pageSize),
             }}
         >
-            <Column title='Order' dataIndex='order' key='order' />
+            <Column title='Order' dataIndex='order' key='order' width={100} />
             <Column
                 title='Name'
+                width={300}
                 dataIndex='username'
                 key='username'
                 sorter={(a, b) => {
@@ -130,6 +141,7 @@ function UsersTable() {
                 }}
             />
             <Column
+                width={400}
                 title='Email'
                 dataIndex='email'
                 key='email'
@@ -137,12 +149,14 @@ function UsersTable() {
                     return a.email.length - b.email.length;
                 }}
             />
-            <Column title='Phone number' dataIndex='phone' key='phone' />
-            <Column title='Created at' dataIndex='createdAt' key='createdAt' />
+            <Column title='Phone number' dataIndex='phone' key='phone' width={300} />
+            <Column title='Created at' dataIndex='createdAt' key='createdAt' width={300} />
 
             <Column
+                fixed='right'
                 title='Action'
                 key='action'
+                width={100}
                 render={record => (
                     <>
                         {!(record.role === 'admin') && (

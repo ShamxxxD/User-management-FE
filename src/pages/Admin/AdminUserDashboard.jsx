@@ -1,34 +1,8 @@
 import React, { useEffect, memo } from 'react';
-import DefaultLayout from '~/layouts/DefaultLayout';
-import {
-    AppstoreOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    ShopOutlined,
-    TeamOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import UsersTable from '~/components/UI/UsersTable';
-import { Layout, Menu, theme } from 'antd';
-const { Content, Sider } = Layout;
-
-const items = [
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    AppstoreOutlined,
-    TeamOutlined,
-    ShopOutlined,
-].map((icon, index) => ({
-    key: String(index + 1),
-    icon: React.createElement(icon),
-    label: `nav ${index + 1}`,
-}));
+import { Row, Col } from 'antd';
+import AppHeader from '~/layouts/Header';
 
 function AdminUserDashboard() {
     const navigate = useNavigate();
@@ -40,57 +14,32 @@ function AdminUserDashboard() {
         }
     });
 
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken();
-
     return (
-        <DefaultLayout>
-            <Layout hasSider>
-                <Sider
-                    style={{
-                        overflow: 'auto',
-                        height: '100vh',
-                        position: 'fixed',
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                    }}
-                >
-                    <div
-                        style={{
-                            height: 32,
-                            margin: 16,
-                            background: 'rgba(255, 255, 255, 0.2)',
-                        }}
-                    />
-                    <Menu theme='dark' mode='inline' defaultSelectedKeys={['4']} items={items} />
-                </Sider>
-                <Layout
-                    className='site-layout'
-                    style={{
-                        marginLeft: 200,
-                    }}
-                >
-                    <Content
-                        style={{
-                            margin: '24px 16px 0',
-                            overflow: 'initial',
-                        }}
-                    >
-                        <div
-                            style={{
-                                padding: 24,
-                                textAlign: 'center',
-                                background: colorBgContainer,
-                            }}
-                        >
-                            <UsersTable />
-                        </div>
-                    </Content>
-                </Layout>
-            </Layout>
-        </DefaultLayout>
+        <Row className='container'>
+            <Col
+                xs={0}
+                sm={0}
+                md={5}
+                lg={5}
+                xl={5}
+                style={{
+                    overflow: 'auto',
+                    position: 'sticky',
+                    zIndex: 100,
+                    top: 0,
+                    bottom: 0,
+                    height: '100vh',
+                    padding: '1rem 2rem',
+                    borderRight: '1px solid #ccc',
+                }}
+            >
+                <AppHeader />
+            </Col>
+
+            <Col xs={24} sm={24} md={19} lg={19} xl={19} className='main-content'>
+                <UsersTable />
+            </Col>
+        </Row>
     );
 }
 export default memo(AdminUserDashboard);

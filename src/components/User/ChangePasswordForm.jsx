@@ -68,8 +68,8 @@ function ChangePasswordForm({ loading, handleSubmit }) {
 
             <Form.Item
                 wrapperCol={{
-                    offset: 8,
-                    span: 16,
+                    xs: { offset: 0, span: 16 },
+                    sm: { offset: 8, span: 16 },
                 }}
             >
                 <Button block type='primary' htmlType='submit' loading={loading}>

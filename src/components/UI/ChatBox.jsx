@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import '~/scss/components/_chatbox.scss';
 import { Row, Col, Avatar, Space, Form, Button, Empty } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
@@ -39,6 +40,7 @@ function ChatBox({ messages, user, currentChatId, onFetchMessages }) {
         message: newMessage,
     };
 
+    console.log('conversationPartner :', conversationPartner);
     return (
         <div className='chat-box'>
             <Row style={{ background: '#f1f1f1', padding: '1rem' }}>

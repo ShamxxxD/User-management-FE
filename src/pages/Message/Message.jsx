@@ -30,6 +30,7 @@ function Message() {
         const fetchConversations = async () => {
             try {
                 const response = await getRequest(`conversations/${user?._id}`);
+
                 setConversations(response.data.conversations);
             } catch (error) {
                 console.log(error);
@@ -37,7 +38,7 @@ function Message() {
         };
 
         user && fetchConversations();
-    }, [user._id]);
+    }, [user, user?._id]);
 
     const handleSetupCurrentChat = params => {
         setCurrentChatId(params);
@@ -54,6 +55,7 @@ function Message() {
 
     useEffect(() => {
         currentChatId && fetchMessages();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentChatId]);
 
     return (
@@ -63,7 +65,6 @@ function Message() {
                     <Row>
                         <Col span={24} className='heading-content'>
                             <PageTitle>Messages</PageTitle>
-                            <Divider style={{ marginBottom: 0 }} />
                         </Col>
 
                         <Col span={24}>

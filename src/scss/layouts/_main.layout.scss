@@ -1,16 +1,14 @@
 @import '../base/variables';
 
-// .main-content {
-//     display: grid;
-//     gap: 2rem;
-//     grid-template-columns: auto 35rem;
-// }
-.content-container {
-    border-left: 1px solid $light-grey-color;
-    border-right: 1px solid $light-grey-color;
-    min-height: 100vh;
-}
-
-.sidebar-container {
-    padding-left: 2rem;
+.main-layout {
+    display: flex;
+    .content-container {
+        border-left: 1px solid $light-grey-color;
+        border-right: 1px solid $light-grey-color;
+        min-height: 100vh;
+        margin-bottom: 3rem;
+    }
+    .sidebar-container {
+        padding-left: 2rem;
+    }
 }

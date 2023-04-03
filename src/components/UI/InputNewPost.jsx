@@ -13,10 +13,10 @@ function InputNewPost({ user }) {
 
     const [tweetImagePreview, setTweetImagePreview] = useState([]);
     const [tweetImage, setTweetImage] = useState([]);
-    const [tweetVideo, setTweetVideo] = useState('');
+    // const [tweetVideo, setTweetVideo] = useState('');
 
-    const [loadingUpload, setLoadingUpload] = useState(false);
-    const [disableUpload, setDisableUpload] = useState(false);
+    const [loadingUpload] = useState(false);
+    const [disableUpload] = useState(false);
     const [disableTweetButton, setDisableTweetButton] = useState(false);
 
     const handleChangeTweetContent = e => {
