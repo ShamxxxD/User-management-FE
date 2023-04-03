@@ -2,39 +2,43 @@
 
 .register-container {
     background-color: $light-grey-color;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    .container-fluid {
+        background-color: inherit;
 
-    .register-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        padding: 8rem 0rem;
-
-        .auth-image {
-            max-height: 60rem;
-            border-radius: 1rem 0 0 1rem;
-        }
-
-        .register-form-wrapper {
+        .register-wrapper {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
 
-            padding: 3rem;
-            background: $white-color;
-            border-radius: 0 1rem 1rem 0;
-
-            height: 60rem;
-
-            .register-form-title {
-                margin-bottom: 3rem;
+            .auth-image {
+                max-height: 60rem;
+                border-radius: 1rem 0 0 1rem;
             }
 
-            .login-recommend {
-                text-align: center;
-                a {
-                    color: $main-color;
-                    font-weight: 600;
+            .register-form-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                padding: 3rem;
+                background: $white-color;
+                border-radius: 0 1rem 1rem 0;
+
+                height: 60rem;
+
+                .register-form-title {
+                    margin-bottom: 3rem;
+                }
+
+                .login-recommend {
+                    text-align: center;
+                    a {
+                        color: $main-color;
+                        font-weight: 600;
+                    }
                 }
             }
         }

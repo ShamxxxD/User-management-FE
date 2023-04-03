@@ -2,7 +2,7 @@
 import '~/scss/pages/_message.scss';
 import PageTitle from '~/components/UI/PageTitle';
 import MainLayout from '~/layouts/MainLayout';
-import { Row, Col, Divider, Button, Empty } from 'antd';
+import { Row, Col, Divider, Button, Empty, Drawer } from 'antd';
 import { useStore } from '~/store';
 import { useState, useEffect, useRef } from 'react';
 import { getRequest } from '~/utils/axiosInstance';
@@ -25,6 +25,14 @@ function Message() {
     //         console.log(' users:', users);
     //     });
     // }, []);
+
+    const [open, setOpen] = useState(false);
+    const showDrawer = () => {
+        setOpen(true);
+    };
+    const onClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         const fetchConversations = async () => {
@@ -64,12 +72,36 @@ function Message() {
                 <Col className='content-container' xs={24} sm={24} xl={24}>
                     <Row>
                         <Col span={24} className='heading-content'>
-                            <PageTitle>Messages</PageTitle>
+                            <Row align='middle' justify='space-between'>
+                                <Col xs={14} lg={24} order={0}>
+                                    <PageTitle>Messages</PageTitle>
+                                </Col>
+
+                                <Col xs={10} lg={0} style={{textAlign:'right'}}>
+                                    <Button type='primary' onClick={showDrawer}>
+                                    Conversations
+                                    </Button>
+                                    <Drawer title='Conversations' placement='right' onClose={onClose} open={open}>
+                                        {Array.isArray(conversations) &&
+                                            conversations.length > 0 &&
+                                            conversations.map((c, index) => {
+                                                return (
+                                                    <Conversation
+                                                        key={index}
+                                                        currentUser={user}
+                                                        conversation={c}
+                                                        onSetCurrentChat={handleSetupCurrentChat}
+                                                    />
+                                                );
+                                            })}
+                                    </Drawer>
+                                </Col>
+                            </Row>
                         </Col>
 
                         <Col span={24}>
                             <Row>
-                                <Col span={16}>
+                                <Col xs={24} sm={24} lg={16}>
                                     {currentChatId ? (
                                         <ChatBox
                                             messages={messages}
@@ -93,7 +125,7 @@ function Message() {
                                         </Empty>
                                     )}
                                 </Col>
-                                <Col span={8}>
+                                <Col xs={0} sm={0} lg={8}>
                                     {Array.isArray(conversations) &&
                                         conversations.length > 0 &&
                                         conversations.map((c, index) => {

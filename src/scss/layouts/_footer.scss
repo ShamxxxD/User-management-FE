@@ -1,0 +1,19 @@
+@import '../base/variables';
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000000000;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: #001529;
+    box-shadow: 0 0 5px 0 #ccc;
+    color: $white-color;
+
+    height: 4rem;
+}

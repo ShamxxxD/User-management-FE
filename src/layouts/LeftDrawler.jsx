@@ -1,6 +1,7 @@
-import { Button, Drawer, Space } from 'antd';
+import { Drawer, Space } from 'antd';
 import { useState } from 'react';
 import { MenuUnfoldOutlined } from '@ant-design/icons';
+import AppHeader from './Header';
 
 const LeftDrawler = () => {
     const [open, setOpen] = useState(false);
@@ -14,14 +15,12 @@ const LeftDrawler = () => {
     return (
         <>
             <Space>
-                <Button onClick={showDrawer}>
+                <div  onClick={showDrawer}  style={{background:'transparent', color:'#fff'}}>
                     <MenuUnfoldOutlined />
-                </Button>
+                </div>
             </Space>
-            <Drawer title='Sham Social' placement={'left'} closable={false} onClose={onClose} open={open}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Drawer  placement={'left'} closable={false} onClose={onClose} open={open}>
+               <AppHeader />
             </Drawer>
         </>
     );

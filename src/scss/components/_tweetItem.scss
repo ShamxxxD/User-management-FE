@@ -2,6 +2,7 @@
 
 .tweet-item {
     padding: 3rem 1.5rem;
+    
     border-top: 1px solid $light-grey-color;
     border-bottom: 1px solid $light-grey-color;
     .tweet-content-wrapper {
@@ -102,6 +103,8 @@
 
             .tweet-item-image {
                 min-width: 70%;
+
+              
             }
         }
     }

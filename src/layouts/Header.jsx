@@ -37,18 +37,18 @@ function AppHeader() {
             </Row>
 
             <Row className='account-wrapper' align='middle'>
-                <Col xs={24} sm={24} md={14} lg={24} xl={20}>
+                <Col xs={20} sm={20} md={14} lg={24} xl={20}>
                     <Space>
                         <Avatar src={user?.avatar} size={50} />
                         <Row>
-                            <Col xs={0} sm={0} md={0} lg={24} xl={24}>
+                            <Col xs={24} sm={24} md={0} lg={24} xl={24}>
                                 <h3>{user?.displayName}</h3>
                                 <div>@{user?.username}</div>
                             </Col>
                         </Row>
                     </Space>
                 </Col>
-                <Col xs={24} sm={24} md={10} lg={24} xl={4}>
+                <Col xs={4} sm={4} md={10} lg={24} xl={4}>
                     <AccountDropDown />
                 </Col>
             </Row>

@@ -116,7 +116,7 @@ function Profile() {
     return (
         <MainLayout>
             <Row>
-                <Col className='content-container' xs={24} sm={24} xl={15}>
+                <Col className='content-container'sm={24} xs={24} md={24} lg={24} xl={15}>
                     <Row>
                         <Col span={24}>
                             <PageTitle>{user?.displayName || user?.username}</PageTitle>
@@ -189,7 +189,7 @@ function Profile() {
                         </Col>
                     </Row>
                 </Col>
-                <Col className='sidebar-container' sm={0} xl={9}>
+                <Col className='sidebar-container'  sm={0} xs={0} md={0} lg={0} xl={9}>
                     <RightSidebar />
                 </Col>
             </Row>

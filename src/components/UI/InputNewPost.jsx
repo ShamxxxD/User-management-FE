@@ -8,7 +8,6 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { postRequest } from '~/utils/axiosInstance';
 
 function InputNewPost({ user, onGetPosts }) {
-    const [form] = Form.useForm();
     const [showEmoji, setShowEmoji] = useState(false);
     const [tweetContent, setTweetContent] = useState('');
 
@@ -94,7 +93,6 @@ function InputNewPost({ user, onGetPosts }) {
         }
     };
 
-    console.log('tweetImagePreview :', tweetImagePreview);
     return (
         <div>
             <Row style={{ marginBottom: '3rem' }}>

@@ -148,10 +148,10 @@ function RightSidebar() {
             <Row>
                 <Col span={24}>
                     <Search
-                        onFocus={() => {
+                        onMouseEnter={() => {
                             setShowSearchPopper(true);
                         }}
-                        style={{ marginBottom: '1rem' }}
+                        style={{ marginBottom: '1rem' }}    
                         size='large'
                         placeholder='Find people...'
                         allowClear
@@ -161,7 +161,7 @@ function RightSidebar() {
                         People you may know
                     </Title>
                     {showSearchPopper && (
-                        <div className='search-popper'>
+                        <div className='search-popper' onMouseLeave={() =>setShowSearchPopper(false) }>
                             {Array.isArray(searchResult) && searchResult.length > 0 && (
                                 <List
                                     itemLayout='horizontal'

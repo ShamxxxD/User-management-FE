@@ -3,15 +3,19 @@ import RegisterForm from '~/components/auth/RegisterForm';
 import authImage from '~/assets/images/auth-image.jpg';
 import { Link } from 'react-router-dom';
 
-import { Typography } from 'antd';
+import { Typography,  Row, Col} from 'antd';
 const { Title } = Typography;
 
 function Register() {
     return (
-        <div className='register-container'>
-            <div className='container-fluid'>
-                <div className='register-wrapper'>
+        <Row className='register-container'>
+            <Col className='container-fluid'>
+                <Row className='register-wrapper'>
+                    <Col  xs={0} sm={0} lg={12}>
                     <img className='auth-image' src={authImage} alt='auth-form' />
+                    </Col>
+                    
+                    <Col xs={24} sm={24} lg={12}>
                     <div className='register-form-wrapper'>
                         <div>
                             Hi, buddy !
@@ -24,9 +28,11 @@ function Register() {
                             Do you have account ? <Link to='/auth/login'>Login</Link>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    </Col>
+                  
+                </Row>
+            </Col>
+        </Row>
     );
 }
 

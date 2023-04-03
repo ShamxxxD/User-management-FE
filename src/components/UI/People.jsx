@@ -7,7 +7,6 @@ import { useState ,memo } from 'react';
 function People({ data, onRemove }) {
     const [isSendRequest , setIsSendRequest] = useState(false)
     
-    console.log(' isSendRequest:', isSendRequest);
     const handleAddFriend = async () => {
         try {
             const response = await postRequest('friends', {

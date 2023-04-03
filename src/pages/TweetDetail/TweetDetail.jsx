@@ -25,6 +25,7 @@ import { deleteRequest, getRequest, patchRequest, postRequest } from '~/utils/ax
 import RightSidebar from '~/components/UI/RightSidebar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { useStore } from '~/store';
 const { Text, Paragraph } = Typography;
 const { TextArea } = Input;
@@ -58,7 +59,6 @@ function TweetDetail() {
         const fetchPost = async () => {
             const response = await getRequest(`posts/${id}`);
 
-            console.log(' response:', response.data);
             setPost(response.data.post);
         };
         fetchPost();
@@ -186,7 +186,7 @@ function TweetDetail() {
     return (
         <MainLayout>
             <Row>
-                <Col className='content-container' xs={24} sm={24} xl={15}>
+                <Col className='content-container' sm={24} xs={24} md={24} lg={24} xl={15}>
                     <Row
                         className='heading-content'
                         style={{
@@ -198,12 +198,14 @@ function TweetDetail() {
                         }}
                     >
                         <Col span={24}>
-                            <Space align='center' style={{ marginLeft: '1.5rem', padding: '1rem 0' }}>
-                                <Button onClick={goPreviousUrl} icon={<ArrowLeftOutlined />}>
-                                    Go back
-                                </Button>
-                                <PageTitle>Tweet</PageTitle>
-                            </Space>
+                            <Row align='middle'>
+                                <Col xs={{ push: 1, span: 3 }}>
+                                    <Button onClick={goPreviousUrl} icon={<ArrowLeftOutlined />}></Button>
+                                </Col>
+                                <Col xs={{ push: 0, span: 20 }}>
+                                    <PageTitle>Tweet</PageTitle>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
 
@@ -217,8 +219,9 @@ function TweetDetail() {
                                         <Space size='small'>
                                             <Link to='/profile'>{post?.author?.displayName}</Link>
                                             <Text type='secondary'>@{post?.author?.username}</Text>
-                                            <Text type='secondary'>-</Text>
-                                            <Text type='secondary'>{post?.createdAt}</Text>
+                                            <Text type='secondary'>
+                                                / {dayjs(post?.createdAt).format('DD/MM/YYYY')}
+                                            </Text>
                                         </Space>
                                     </Space>
                                 </Col>
@@ -248,10 +251,20 @@ function TweetDetail() {
                                 <Col span={24} style={{ marginTop: '0.8rem' }}>
                                     <Space size='large'>
                                         <div className='tweet-icon'>
-                                            <CommentOutlined className='comment-icon' />
-                                            <span>
-                                                {totalComments > 0 ? `${totalComments} comments on this post` : null}
-                                            </span>
+                                            <Row align='middle'>
+                                                <Col >
+                                                    <CommentOutlined className='comment-icon' />
+                                                </Col>
+
+                                                <Col >
+                                                    <span>
+                                                        {totalComments > 0
+                                                            ? `${totalComments} comments`
+                                                            : null}
+                                                    </span>
+                                                </Col>
+                                            </Row>
+                                          
                                         </div>
                                         <div className='tweet-icon'>
                                             {isLiked ? (
@@ -369,7 +382,7 @@ function TweetDetail() {
                 </Col>
                 {/* End Main content */}
 
-                <Col className='sidebar-container' sm={0} xl={9}>
+                <Col className='sidebar-container' sm={0} xs={0} md={0} lg={0} xl={9}>
                     <RightSidebar />
                 </Col>
             </Row>

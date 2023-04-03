@@ -1,6 +1,7 @@
 import '~/scss/layouts/_main.layout.scss';
 import { Row, Col } from 'antd';
 import AppHeader from './Header';
+import FooterNav from './FooterNav';
 function MainLayout({ children }) {
     return (
         <Row className='container-fluid main-layout'>
@@ -25,6 +26,10 @@ function MainLayout({ children }) {
 
             <Col xs={24} sm={24} md={19} lg={18} xl={18} className='main-content'>
                 {children}
+            </Col>
+
+            <Col xs={24} sm={24} md={0}>
+                <FooterNav />
             </Col>
         </Row>
     );

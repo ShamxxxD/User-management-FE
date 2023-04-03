@@ -89,19 +89,18 @@ function TweetItem({ post, onGetPosts }) {
             <div className='tweet-content-wrapper'>
                 <Avatar className='tweet-item-avatar' src={post?.author?.avatar} alt='avatar' size={50} />
                 <Row className='tweet-item-content'>
-                    <Col span={18}>
-                        <Space size='small'>
+                    <Col xs={20}>
+                        <Space size='small' wrap>
                             <Link to={`/profile/${post?.author?._id}`}>{post?.author?.displayName}</Link>
                             <Text type='secondary'>@{post?.author?.username}</Text>
-                            <Text type='secondary'>-</Text>
-                            <Text type='secondary'>{dayjs(post?.createdAt).fromNow()}</Text>
+                            <Text type='secondary'>/ {dayjs(post?.createdAt).fromNow()}</Text>
                         </Space>
                     </Col>
                     {currentId === post.author._id && (
-                        <Col span={6}>
+                        <Col xs={4}>
                             <Row justify='end' align='middle'>
-                                <Col>
-                                    <Button onClick={showModal}>
+                                <Col span={24} style={{textAlign:'right'}}>
+                                    <Button onClick={showModal} size='small'>
                                         <EllipsisOutlined />
                                     </Button>
                                 </Col>
@@ -152,10 +151,10 @@ function TweetItem({ post, onGetPosts }) {
                                     <Paragraph>{post?.content}</Paragraph>
                                 </Col>
                                 {post?.image && (
-                                    <Col span={24}>
+                                    <Col xs={24} sm={20} md={18}>
                                         <Image
                                             className='tweet-item-image'
-                                            width='75%'
+                                            width='100%'
                                             preview={false}
                                             src={post?.image}
                                             style={{
@@ -173,24 +172,42 @@ function TweetItem({ post, onGetPosts }) {
                         <Space size='large'>
                             <div className='tweet-item-icon-wrapper'>
                                 <Link to={`/posts/${post?._id}`}>
-                                    <CommentOutlined className='comment-icon' />
-                                    <span>{comments > 0 ? `${comments} comments on this post` : comments}</span>
+                                    <Row align='middle'>
+                                        <Col  xs={12} sm={12}> 
+                                            <CommentOutlined className='comment-icon' />
+                                        </Col>
+
+                                        <Col  xs={0} sm={{push:8, span:12}}>
+                                            <span>{comments > 0 ? `${comments} comments on this post` : comments}</span>
+                                        </Col>
+                                        
+                                        <Col xs={{push:6, span:12}} sm={0}>
+                                            <span>{comments}</span>
+                                        </Col>
+                                    </Row>
                                 </Link>
                             </div>
                             <div className='tweet-item-icon-wrapper'>
-                                {isLiked ? (
-                                    <HeartFilled className='like-icon-filled' onClick={handleLike} />
-                                ) : (
-                                    <HeartOutlined className='like-icon' onClick={handleLike} />
-                                )}
-                                <span>{likes > 0 ? `${likes} people like it` : likes}</span>
+                                <Row align='middle'>
+                                    <Col>
+                                        {isLiked ? (
+                                            <HeartFilled className='like-icon-filled' onClick={handleLike} />
+                                        ) : (
+                                            <HeartOutlined className='like-icon' onClick={handleLike} />
+                                        )}
+                                    </Col>
+
+                                    <Col>
+                                        <span>{likes > 0 ? `${likes} people like it` : likes}</span>
+                                    </Col>
+                                </Row>
                             </div>
                         </Space>
                     </Col>
                 </Row>
             </div>
 
-            <div className='tweet-comment-wrapper' span={24}>
+            <div className='tweet-comment-wrapper'>
                 <List
                     header='Comments'
                     className='demo-loadmore-list'
