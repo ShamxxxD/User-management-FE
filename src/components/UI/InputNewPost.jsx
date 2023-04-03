@@ -14,7 +14,6 @@ function InputNewPost({ user, onGetPosts }) {
 
     const [tweetImagePreview, setTweetImagePreview] = useState('');
     const [tweetImage, setTweetImage] = useState();
-    // const [tweetVideo, setTweetVideo] = useState('');
 
     const [loadingUpload] = useState(false);
     const [disableUpload] = useState(false);
@@ -88,7 +87,7 @@ function InputNewPost({ user, onGetPosts }) {
             });
             onGetPosts();
             setTweetContent('');
-            setTweetImagePreview([]);
+            setTweetImagePreview('');
             console.log(response.data);
         } catch (error) {
             console.log(error);
@@ -114,8 +113,9 @@ function InputNewPost({ user, onGetPosts }) {
                     />
                 </Col>
             </Row>
-            <Row>
-                {tweetImagePreview && (
+
+            {tweetImagePreview && (
+                <Row>
                     <Col span={24}>
                         <Image
                             preview={false}
@@ -128,8 +128,8 @@ function InputNewPost({ user, onGetPosts }) {
                             }}
                         />
                     </Col>
-                )}
-            </Row>
+                </Row>
+            )}
 
             <Divider style={{ marginBottom: '1rem' }} />
             <Row>

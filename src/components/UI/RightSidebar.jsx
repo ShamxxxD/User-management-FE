@@ -138,6 +138,11 @@ function RightSidebar() {
         }
     }, 500);
 
+    const handleRemove =  (data) => {
+          const newPeople = peoples.filter (item => item._id !== data._id)
+            setPeoples(newPeople)
+    };
+
     return (
         <div className='right-sidebar'>
             <Row>
@@ -170,7 +175,7 @@ function RightSidebar() {
                                                         {item.displayName || item.username}
                                                     </Link>
                                                 }
-                                                description='bạn bè'
+                                                description='friend'
                                             />
                                         </List.Item>
                                     )}
@@ -194,7 +199,7 @@ function RightSidebar() {
                         renderItem={item => (
                             <List.Item>
                                 <Skeleton avatar title={false} loading={item.loading} active>
-                                    <People key={item._id} data={item} />
+                                    <People key={item._id} data={item} onRemove={handleRemove} />
                                 </Skeleton>
                             </List.Item>
                         )}

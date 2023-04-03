@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
+
 const axiosClient = axios.create();
 
 axiosClient.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
@@ -24,13 +25,24 @@ axiosClient.interceptors.request.use(async config => {
         const now = new Date().getTime();
         const jwtDecoded = await jwtDecode(accessToken);
         if (jwtDecoded.exp < now / 1000 && !isRefreshing) {
+        
             isRefreshing = true;
             try {
                 const response = await postRequest('auth/refresh');
-                console.log('New Token: ', response.data.accessToken);
-                localStorage.setItem('accessToken', response.data.accessToken);
-                config.headers['token'] = `Bearer ${response.data.accessToken}`;
+                console.log(' response:', response);
+                if(response.status === 200) {
+                    console.log('New Token: ', response.data.accessToken);
+                    localStorage.setItem('accessToken', response.data.accessToken);
+                    config.headers['token'] = `Bearer ${response.data.accessToken}`;
+                } else {
+                    localStorage.removeItem('accessToken');
+                    window.location.href = '/auth/login';
+                }
+         
+               
             } catch (error) {
+                localStorage.removeItem('accessToken');
+                window.location.href = '/auth/login';
                 console.error('Failed to refresh token', error);
             } finally {
                 isRefreshing = false;

@@ -1,13 +1,20 @@
 import { Avatar, Button, Row, Col, Space } from 'antd';
 import Paragraph from 'antd/es/typography/Paragraph';
 import { postRequest } from '~/utils/axiosInstance';
+import { useState ,memo } from 'react';
 
-function People({ data }) {
+
+function People({ data, onRemove }) {
+    const [isSendRequest , setIsSendRequest] = useState(false)
+    
+    console.log(' isSendRequest:', isSendRequest);
     const handleAddFriend = async () => {
         try {
             const response = await postRequest('friends', {
                 _friendId: data?._id,
             });
+            
+            setIsSendRequest(true)
             console.log('response :', response);
         } catch (error) {
             console.log(' error:', error);
@@ -33,10 +40,10 @@ function People({ data }) {
             <Col>
                 <Paragraph>{data?.displayName || data?.username}</Paragraph>
                 <Space>
-                    <Button type='primary' onClick={handleAddFriend}>
+                    <Button type='primary' onClick={handleAddFriend} disabled={isSendRequest}>
                         Add friend
                     </Button>
-                    <Button danger type='primary'>
+                    <Button danger type='primary' onClick={() => onRemove(data)}>
                         Remove
                     </Button>
                 </Space>
@@ -45,4 +52,4 @@ function People({ data }) {
     );
 }
 
-export default People;
+export default memo(People);

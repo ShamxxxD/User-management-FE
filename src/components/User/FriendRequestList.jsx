@@ -8,15 +8,16 @@ function FriendRequestList() {
 
     const [friendRequests, setFriendRequests] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [acceptedId, setAcceptedId] = useState([]);
+    const [rejectedId, setRejectedId] = useState([]);
 
     useEffect(() => {
-        const fetchUserFriends = async () => {
+        const fetchFriendsRequest = async () => {
             const response = await getRequest(`friends/${user?._id}/request`);
-            console.log(' response:', response);
             setLoading(false);
             setFriendRequests(response.data.friends);
         };
-        fetchUserFriends();
+        fetchFriendsRequest();
     }, []);
 
     const handleAcceptFriend = async item => {
@@ -26,15 +27,28 @@ function FriendRequestList() {
                 status: 'accepted',
             });
             if (response.status === 200) {
-                setFriendRequests([]);
+                const newAcceptedId = [...acceptedId, friendId];
+                setAcceptedId(newAcceptedId);
             }
-
-            console.log(' response:', response.data);
         } catch (error) {
             console.log('error :', error);
         }
     };
 
+    const handleRejectFriend = async item => {
+        try {
+            const rejectId = item.user._id;
+            const response = await patchRequest(`friends/${rejectId}`, {
+                status: 'rejected',
+            });
+            if (response.status === 200) {
+                const newRejectedId = [...rejectedId, rejectId];
+                setRejectedId(newRejectedId);
+            }
+        } catch (error) {
+            console.log('error :', error);
+        }
+    };
     return (
         <List
             loading={loading}
@@ -44,10 +58,25 @@ function FriendRequestList() {
             renderItem={(item, index) => (
                 <List.Item
                     actions={[
-                        <Button type='primary' onClick={() => handleAcceptFriend(item)}>
-                            Accept
-                        </Button>,
-                        <Button danger>Remove</Button>,
+                         (
+                            <Button
+                                type='primary'
+                                disabled={acceptedId?.includes(item.user._id) || rejectedId?.includes(item.user._id) ? true : false}
+                                onClick={() => handleAcceptFriend(item)}
+                            >
+                                {acceptedId?.includes(item.user._id) ? 'Accepted' : 'Accept'}
+                            </Button>
+                        ),
+
+                         (
+                            <Button
+                                danger
+                                disabled={rejectedId?.includes(item.user._id) || acceptedId?.includes(item.user._id)  ? true : false}
+                                onClick={() => handleRejectFriend(item)}
+                            >
+                                {rejectedId?.includes(item.user._id) ? 'Removed' : 'Remove'}
+                            </Button>
+                        ),
                     ]}
                 >
                     <Skeleton avatar title={false} loading={item.loading} active>
