@@ -1,4 +1,4 @@
-import { Divider, Row, Col, Input, Button, Space, message, Upload, Image } from 'antd';
+import { Divider, Row, Col, Input, Button, Space, message, Upload, Image, Form } from 'antd';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { useEffect, useState } from 'react';
@@ -7,12 +7,13 @@ import { storage, avatarsStorage } from '~/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { postRequest } from '~/utils/axiosInstance';
 
-function InputNewPost({ user }) {
+function InputNewPost({ user, onGetPosts }) {
+    const [form] = Form.useForm();
     const [showEmoji, setShowEmoji] = useState(false);
     const [tweetContent, setTweetContent] = useState('');
 
-    const [tweetImagePreview, setTweetImagePreview] = useState([]);
-    const [tweetImage, setTweetImage] = useState([]);
+    const [tweetImagePreview, setTweetImagePreview] = useState('');
+    const [tweetImage, setTweetImage] = useState();
     // const [tweetVideo, setTweetVideo] = useState('');
 
     const [loadingUpload] = useState(false);
@@ -71,6 +72,7 @@ function InputNewPost({ user }) {
     };
 
     const uploadTweet = async () => {
+        console.log('tweetImage :', tweetImage);
         const data = {
             content: tweetContent,
             author: user._id,
@@ -84,12 +86,16 @@ function InputNewPost({ user }) {
                     token: accessToken,
                 },
             });
+            onGetPosts();
+            setTweetContent('');
+            setTweetImagePreview([]);
             console.log(response.data);
         } catch (error) {
             console.log(error);
         }
     };
 
+    console.log('tweetImagePreview :', tweetImagePreview);
     return (
         <div>
             <Row style={{ marginBottom: '3rem' }}>
@@ -109,30 +115,20 @@ function InputNewPost({ user }) {
                 </Col>
             </Row>
             <Row>
-                {/* {Array.isArray(tweetImage) &&
-                    tweetImages.length > 0 &&
-                    tweetImages.map((item, index) => {
-                        const colSpan = 24 / tweetImages.length;
-                        console.log(colSpan);
-                        return (
-                            <Col key={index} span={colSpan} style={{ minWidth: '50%' }}>
-                              
-                            </Col>
-                        );
-                    })} */}
-
-                <Col span={24}>
-                    <Image
-                        preview={false}
-                        src={tweetImagePreview.preview}
-                        style={{
-                            width: '100%',
-                            aspectRatio: 2 / 3,
-                            objectFit: 'cover',
-                            borderRadius: '2rem',
-                        }}
-                    />
-                </Col>
+                {tweetImagePreview && (
+                    <Col span={24}>
+                        <Image
+                            preview={false}
+                            src={tweetImagePreview.preview}
+                            style={{
+                                width: '100%',
+                                aspectRatio: 2 / 3,
+                                objectFit: 'cover',
+                                borderRadius: '2rem',
+                            }}
+                        />
+                    </Col>
+                )}
             </Row>
 
             <Divider style={{ marginBottom: '1rem' }} />

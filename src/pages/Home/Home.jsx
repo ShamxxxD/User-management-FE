@@ -59,7 +59,7 @@ function Home() {
                                 <UserAvatar />
                             </Col>
                             <Col span={20}>
-                                <InputNewPost user={user} />
+                                <InputNewPost user={user} onGetPosts={getPosts} />
                             </Col>
                         </Row>
                     </Col>

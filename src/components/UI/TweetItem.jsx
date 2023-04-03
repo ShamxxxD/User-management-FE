@@ -97,52 +97,53 @@ function TweetItem({ post, onGetPosts }) {
                             <Text type='secondary'>{dayjs(post?.createdAt).fromNow()}</Text>
                         </Space>
                     </Col>
-
-                    <Col span={6}>
-                        <Row justify='end' align='middle'>
-                            <Col>
-                                <Button onClick={showModal}>
-                                    <EllipsisOutlined />
-                                </Button>
-                            </Col>
-                        </Row>
-                        {isModalOpen && (
-                            <div className='tweet-actions-modal'>
-                                <div className='tweet-action-item' onClick={showDeleteModal}>
-                                    <DeleteOutlined /> Delete this tweet
-                                    <Modal
-                                        okType='danger'
-                                        okButtonProps={'primary'}
-                                        open={isDeleteModalOpen}
-                                        onOk={handleDelete}
-                                        onCancel={() => {
-                                            setIsDeleteModalOpen(false);
-                                        }}
-                                        title='Delete tweet'
-                                    >
-                                        This can’t be undone and it will be removed from your profile, the timeline of
-                                        any accounts that follow you, and from Twitter search results.
-                                    </Modal>
+                    {currentId === post.author._id && (
+                        <Col span={6}>
+                            <Row justify='end' align='middle'>
+                                <Col>
+                                    <Button onClick={showModal}>
+                                        <EllipsisOutlined />
+                                    </Button>
+                                </Col>
+                            </Row>
+                            {isModalOpen && (
+                                <div className='tweet-actions-modal'>
+                                    <div className='tweet-action-item' onClick={showDeleteModal}>
+                                        <DeleteOutlined /> Delete this tweet
+                                        <Modal
+                                            okType='danger'
+                                            okButtonProps={'primary'}
+                                            open={isDeleteModalOpen}
+                                            onOk={handleDelete}
+                                            onCancel={() => {
+                                                setIsDeleteModalOpen(false);
+                                            }}
+                                            title='Delete tweet'
+                                        >
+                                            This can’t be undone and it will be removed from your profile, the timeline
+                                            of any accounts that follow you, and from Twitter search results.
+                                        </Modal>
+                                    </div>
+                                    <div className='tweet-action-item'>
+                                        <EditOutlined onClick={showEditModal} /> Edit this tweet
+                                        <Modal
+                                            okText='Save'
+                                            okButtonProps={'primary'}
+                                            open={isEditModalOpen}
+                                            onOk={handleEdit}
+                                            onCancel={() => {
+                                                setIsEditModalOpen(false);
+                                            }}
+                                            title='Edit tweet'
+                                        >
+                                            This can’t be undone and it will be removed from your profile, the timeline
+                                            of any accounts that follow you, and from Twitter search results.
+                                        </Modal>
+                                    </div>
                                 </div>
-                                <div className='tweet-action-item'>
-                                    <EditOutlined onClick={showEditModal} /> Edit this tweet
-                                    <Modal
-                                        okText='Save'
-                                        okButtonProps={'primary'}
-                                        open={isEditModalOpen}
-                                        onOk={handleEdit}
-                                        onCancel={() => {
-                                            setIsEditModalOpen(false);
-                                        }}
-                                        title='Edit tweet'
-                                    >
-                                        This can’t be undone and it will be removed from your profile, the timeline of
-                                        any accounts that follow you, and from Twitter search results.
-                                    </Modal>
-                                </div>
-                            </div>
-                        )}
-                    </Col>
+                            )}
+                        </Col>
+                    )}
 
                     <Col span={24}>
                         <Link to={`/posts/${post?._id}`}>
@@ -150,19 +151,21 @@ function TweetItem({ post, onGetPosts }) {
                                 <Col span={24}>
                                     <Paragraph>{post?.content}</Paragraph>
                                 </Col>
-                                <Col span={24}>
-                                    <Image
-                                        className='tweet-item-image'
-                                        width='75%'
-                                        preview={false}
-                                        src={post?.image}
-                                        style={{
-                                            aspectRatio: 2 / 3,
-                                            objectFit: 'cover',
-                                            borderRadius: '2rem',
-                                        }}
-                                    />
-                                </Col>
+                                {post?.image && (
+                                    <Col span={24}>
+                                        <Image
+                                            className='tweet-item-image'
+                                            width='75%'
+                                            preview={false}
+                                            src={post?.image}
+                                            style={{
+                                                aspectRatio: 2 / 3,
+                                                objectFit: 'cover',
+                                                borderRadius: '2rem',
+                                            }}
+                                        />
+                                    </Col>
+                                )}
                             </Row>
                         </Link>
                     </Col>

@@ -17,7 +17,6 @@ function Conversation({ conversation, currentUser, onSetCurrentChat }) {
         const getConversationUsersInfo = async () => {
             try {
                 const response = await getRequest(`users/${friendId}`);
-                console.log('response :', response.data);
                 setConversationUser(response.data.user);
             } catch (error) {
                 console.log(error);

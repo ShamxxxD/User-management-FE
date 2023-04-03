@@ -185,13 +185,7 @@ function Profile() {
                         </Col>
 
                         <Col span={24} style={{ marginBottom: '1.5rem' }}>
-                            <Tabs
-                                defaultActiveKey='1'
-                                items={items}
-                                size='large'
-                                centered
-                                onChange={item => console.log(item)}
-                            />
+                            <Tabs defaultActiveKey='1' items={items} size='large' centered />
                         </Col>
                     </Row>
                 </Col>

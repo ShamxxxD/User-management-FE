@@ -58,7 +58,7 @@ function TweetDetail() {
         const fetchPost = async () => {
             const response = await getRequest(`posts/${id}`);
 
-            setLikes(response.data.post.likes.length);
+            console.log(' response:', response.data);
             setPost(response.data.post);
         };
         fetchPost();
@@ -227,17 +227,20 @@ function TweetDetail() {
                             <Row className='tweet-content'>
                                 <Col span={24}>
                                     <Paragraph>{post?.content}</Paragraph>
-                                    <Image
-                                        width='100%'
-                                        preview={false}
-                                        src={post?.image}
-                                        style={{
-                                            width: '100%',
-                                            aspectRatio: 2 / 3,
-                                            objectFit: 'cover',
-                                            borderRadius: '2rem',
-                                        }}
-                                    />
+
+                                    {post?.image && (
+                                        <Image
+                                            width='100%'
+                                            preview={false}
+                                            src={post?.image}
+                                            style={{
+                                                width: '100%',
+                                                aspectRatio: 2 / 3,
+                                                objectFit: 'cover',
+                                                borderRadius: '2rem',
+                                            }}
+                                        />
+                                    )}
                                 </Col>
                             </Row>
 
