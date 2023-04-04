@@ -81,7 +81,7 @@ function Message() {
                                     <Button type='primary' onClick={showDrawer}>
                                     Conversations
                                     </Button>
-                                    <Drawer title='Conversations' placement='right' onClose={onClose} open={open}>
+                                    <Drawer title='Conversations'  width='32rem'  placement='right' onClose={onClose} open={open}>
                                         {Array.isArray(conversations) &&
                                             conversations.length > 0 &&
                                             conversations.map((c, index) => {
@@ -117,11 +117,11 @@ function Message() {
                                             }}
                                             description={
                                                 <span>
-                                                    Customize <a href='#API'>Description</a>
+                                                    Choose a conversation to start message
                                                 </span>
                                             }
                                         >
-                                            <Button type='primary'>Create Now</Button>
+                                            {/* <Button type='primary'>Create Now</Button> */}
                                         </Empty>
                                     )}
                                 </Col>

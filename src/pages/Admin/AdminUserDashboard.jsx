@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UsersTable from '~/components/UI/UsersTable';
 import { Row, Col } from 'antd';
 import AppHeader from '~/layouts/Header';
+import FooterNav from '~/layouts/FooterNav';
 
 function AdminUserDashboard() {
     const navigate = useNavigate();
@@ -39,6 +40,8 @@ function AdminUserDashboard() {
             <Col xs={24} sm={24} md={19} lg={19} xl={19} className='main-content'>
                 <UsersTable />
             </Col>
+
+            <FooterNav/>
         </Row>
     );
 }

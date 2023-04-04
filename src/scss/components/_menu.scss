@@ -1,0 +1,31 @@
+@import '../base/variables';
+@import '../base/mixins';
+
+.header-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .menu-item {
+        display: block;
+        padding: 1.2rem 1.5rem;
+        border-radius: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.8rem;
+        transition: all .3s;
+
+        .menu-item-text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+      
+
+        &.active {
+            background: $light-blue-color;
+            color: $main-color;
+        }
+    }
+}

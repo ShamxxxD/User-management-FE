@@ -15,11 +15,11 @@ const LeftDrawler = () => {
     return (
         <>
             <Space>
-                <div  onClick={showDrawer}  style={{background:'transparent', color:'#fff'}}>
+                <div  onClick={showDrawer} style={{background:'transparent', color:'#fff'}}>
                     <MenuUnfoldOutlined />
                 </div>
             </Space>
-            <Drawer  placement={'left'} closable={false} onClose={onClose} open={open}>
+            <Drawer  placement={'left'} closable={true} onClose={onClose} open={open} width='32rem' >
                <AppHeader />
             </Drawer>
         </>

@@ -4,6 +4,10 @@
     padding: 0.5rem 1rem;
     background-color: $light-blue-color;
     transition: all 0.3s;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+     margin-left: .5rem;
 
     &:hover {
         cursor: pointer;

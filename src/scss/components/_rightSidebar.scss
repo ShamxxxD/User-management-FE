@@ -1,98 +1,108 @@
 @import '../base/variables';
 
 .right-sidebar {
+    height: 100vh;
     position: sticky;
-    height: calc(100vh - 1rem);
-    top: 1rem;
-    overflow: hidden;
+    top: 0rem;
+    .right-sidebar-search {
+        padding: 1rem 0;
+        height: 6rem;
+        .search-popper {
+            position: absolute;
+            top: 4.5rem;
+            right: 0rem;
+            left: 0rem;
+            background: $white-color;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            min-height: 10rem;
+            max-height: 60vh;
+            z-index: 10;
+            border-radius: 0.6rem;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+            overflow-y: auto;
 
-    .search-popper {
-        position: absolute;
-        top: 4.5rem;
-        right: 0rem;
-        left: 0rem;
-        background: $white-color;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        min-height: 10rem;
-        max-height: 60vh;
-        z-index: 10;
-        border-radius: 0.6rem;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
-        overflow-y: auto;
-
-        &::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            border-radius: 6px;
-            background-color: #f5f5f5;
-        }
-
-        &::-webkit-scrollbar {
-            width: 6px;
-            background-color: #f5f5f5;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 6px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            background-color: #555;
-        }
-
-        .item-search {
-            padding: 1rem 2rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            border-bottom: 1px solid $light-grey-color;
-
-            &:hover {
-                background: $light-grey-color;
+            &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                border-radius: 6px;
+                background-color: #f5f5f5;
             }
 
-            .ant-list-item-meta {
-                align-items: center;
+            &::-webkit-scrollbar {
+                width: 6px;
+                background-color: #f5f5f5;
+            }
 
-                .ant-list-item-meta-avatar {
-                    margin-inline-end: 1rem;
+            &::-webkit-scrollbar-thumb {
+                border-radius: 6px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                background-color: #555;
+            }
+
+            .item-search {
+                padding: 1rem 2rem;
+                transition: all 0.3s;
+                cursor: pointer;
+                border-bottom: 1px solid $light-grey-color;
+
+                &:hover {
+                    background: $light-grey-color;
                 }
 
-                .ant-list-item-meta-content {
-                    .ant-list-item-meta-title {
-                        font-size: 16px;
-                        margin: 0;
+                .ant-list-item-meta {
+                    align-items: center;
+
+                    .ant-list-item-meta-avatar {
+                        margin-inline-end: 1rem;
+                    }
+
+                    .ant-list-item-meta-content {
+                        .ant-list-item-meta-title {
+                            font-size: 16px;
+                            margin: 0;
+                        }
                     }
                 }
             }
         }
     }
 
-    .peoples {
-        height: calc(100% - 9.5rem);
-        overflow-y: auto;
-
-        padding: 1rem 0 3rem 1rem;
-
-        &:hover {
-            &::-webkit-scrollbar-thumb {
-                visibility: visible;
-            }
-        }
-
-        &::-webkit-scrollbar {
-            width: 10px;
-            background-color: #f5f5f5;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            visibility: visible;
-            background-color: #0ae;
-
-            background-image: -webkit-gradient(
-                linear,
-                0 0,
-                0 100%,
-                color-stop(0.5, rgba(255, 255, 255, 0.2)),
-                color-stop(0.5, transparent),
-                to(transparent)
-            );
+    .twitter-embed{
+        height: calc(100vh - 6rem);
+        overflow: auto;
+            &::-webkit-scrollbar {
+            display: none;
         }
     }
+
+    // .peoples {
+    //     height: calc(100% - 9.5rem);
+    //     overflow-y: auto;
+
+    //     padding: 1rem 0 3rem 1rem;
+
+    //     &:hover {
+    //         &::-webkit-scrollbar-thumb {
+    //             visibility: visible;
+    //         }
+    //     }
+
+    //     &::-webkit-scrollbar {
+    //         width: 10px;
+    //         background-color: #f5f5f5;
+    //     }
+
+    //     &::-webkit-scrollbar-thumb {
+    //         visibility: visible;
+    //         background-color: #0ae;
+
+    //         background-image: -webkit-gradient(
+    //             linear,
+    //             0 0,
+    //             0 100%,
+    //             color-stop(0.5, rgba(255, 255, 255, 0.2)),
+    //             color-stop(0.5, transparent),
+    //             to(transparent)
+    //         );
+    //     }
+    // }
 }

@@ -45,10 +45,4 @@ li {
     max-width: 125rem;
     margin: 0 auto;
     background-color: $white-color;
-    @media screen and (max-width: 130rem) {
-        padding: 0 1rem;
-    }
-    @media screen and (min-width: 180rem) {
-        max-width: 80vw;
-    }
 }

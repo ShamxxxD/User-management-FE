@@ -2,7 +2,7 @@
 import '~/scss/pages/_home.scss';
 import PageTitle from '~/components/UI/PageTitle';
 import MainLayout from '~/layouts/MainLayout';
-import { Segmented, Row, Col } from 'antd';
+import { Button, Row, Col } from 'antd';
 import InputNewPost from '~/components/UI/InputNewPost';
 import { useStore } from '~/store';
 import UserAvatar from '~/components/User/UserAvatar';
@@ -17,13 +17,14 @@ function Home() {
 
     const [posts, setPosts] = useState([]);
     const [skip, setSkip] = useState(0);
+    const [disableSkip, setDisableSkip] = useState(false);
 
     const getPosts = async () => {
         try {
             const response = await getRequest('posts', {
                 params: {
-                    _skip: skip,
-                    _limit: 10,
+                    _skip: 0,
+                    _limit: 5,
                     _userId: user._id,
                 },
             });
@@ -34,9 +35,31 @@ function Home() {
     };
 
     useEffect(() => {
-        getPosts();
+        getPosts()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [ ]);
+
+    const skipPost = async () => {
+        let skipPost = skip + 1 
+        try {
+            const response = await getRequest('posts', {
+                params: {
+                    _skip: skipPost,
+                    _limit: 5,
+                    _userId: user._id,
+                },
+            });
+
+            if ( response.data.posts.length < 5) {
+                setDisableSkip(true)
+            }
+           const newPosts = posts.concat(response.data.posts)
+            setSkip(skipPost)
+            setPosts(newPosts);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <MainLayout>
@@ -45,16 +68,10 @@ function Home() {
                     <Row>
                         <Col span={24} className='heading-content'>
                             <PageTitle>Home</PageTitle>
-                            <Segmented
-                                block
-                                options={['For you', 'Following']}
-                                size='large'
-                                style={{ margin: '1rem 0.3rem' }}
-                            />
                         </Col>
                     </Row>
                     <Col span={24}>
-                        <Row style={{ padding: '0 1.5rem', marginBottom: '3rem' }}>
+                        <Row style={{ padding: '0 1.5rem', margin: '3rem 0' }}>
                             <Col span={3}>
                                 <UserAvatar />
                             </Col>
@@ -70,6 +87,12 @@ function Home() {
                             posts.map(post => {
                                 return <TweetItem key={post._id} post={post} onGetPosts={getPosts} />;
                             })}
+                    </Col>
+
+                    <Col span={24} style={{textAlign:'center' , margin:'1rem 0'}}>
+                
+                        {!disableSkip  ?   <Button type='text' onClick={() => skipPost()}>Load more posts ...</Button> : 'No more posts ...'}
+                       
                     </Col>
                 </Col>
 

@@ -3,8 +3,6 @@ import '~/scss/components/_conversation.scss';
 import { useState, useEffect } from 'react';
 import { getRequest } from '~/utils/axiosInstance';
 import Avatar from 'antd/es/avatar/avatar';
-import { Row, Col, Space } from 'antd';
-import Title from 'antd/es/typography/Title';
 import { actions, useStore } from '~/store';
 
 function Conversation({ conversation, currentUser, onSetCurrentChat }) {
@@ -27,32 +25,27 @@ function Conversation({ conversation, currentUser, onSetCurrentChat }) {
 
     return (
         <>
-            <Row
+            <div
                 className='conversation-item'
                 onClick={() => {
-                    console.log('conversationUser :', conversationUser);
                     dispatch(actions.setConversationPartner(conversationUser));
                     onSetCurrentChat(conversation._id);
                 }}
             >
-                <Space>
-                    {conversationUser ? (
+                {conversationUser ? (
+                    <>
+                        <Avatar src={<img src={conversationUser?.avatar} alt='avatar' />} size={50} />
                         <div>
-                            <Col>
-                                <Avatar src={<img src={conversationUser?.avatar} alt='avatar' />} size={50} />
-                            </Col>
-                            <Col>
-                                <Title level={4} style={{ marginBottom: 0 }} className='conversation-user-name'>
-                                    {conversationUser?.displayName || conversationUser?.username}
-                                </Title>
-                                About 2 minutes ago
-                            </Col>
+                            <h3 className='conversation-user-name'>
+                                {conversationUser?.displayName || conversationUser?.username}
+                            </h3>
+                            About 2 minutes ago 
                         </div>
-                    ) : (
-                        'User has been deleted'
-                    )}
-                </Space>
-            </Row>
+                    </>
+                ) : (
+                    'User has been deleted'
+                )}
+            </div>
         </>
     );
 }

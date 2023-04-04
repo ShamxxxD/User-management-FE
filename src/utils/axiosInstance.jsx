@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-
+import { useNavigate } from 'react-router-dom';
 
 const axiosClient = axios.create();
 
@@ -29,20 +29,16 @@ axiosClient.interceptors.request.use(async config => {
             isRefreshing = true;
             try {
                 const response = await postRequest('auth/refresh');
-                console.log(' response:', response);
                 if(response.status === 200) {
-                    console.log('New Token: ', response.data.accessToken);
                     localStorage.setItem('accessToken', response.data.accessToken);
                     config.headers['token'] = `Bearer ${response.data.accessToken}`;
-                } else {
-                    localStorage.removeItem('accessToken');
-                    window.location.href = '/auth/login';
-                }
-         
+                } 
+
+                console.log('response:',response );
                
             } catch (error) {
                 localStorage.removeItem('accessToken');
-                window.location.href = '/auth/login';
+                window.location.href = '/auth/login'
                 console.error('Failed to refresh token', error);
             } finally {
                 isRefreshing = false;

@@ -31,7 +31,6 @@ function ChatBox({ messages, user, currentChatId, onFetchMessages }) {
     };
 
     useEffect(() => {
-        console.log(newMessage);
         scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
         setNewMessage('');
     }, [newMessage]);
@@ -40,7 +39,6 @@ function ChatBox({ messages, user, currentChatId, onFetchMessages }) {
         message: newMessage,
     };
 
-    console.log('conversationPartner :', conversationPartner);
     return (
         <div className='chat-box'>
             <Row style={{ background: '#f1f1f1', padding: '1rem' }}>

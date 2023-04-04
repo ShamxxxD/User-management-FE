@@ -6,6 +6,8 @@ import Profile from '~/pages/Profile/Profile';
 import ChangePassword from '~/pages/Profile/ChangePassword';
 import Message from '~/pages/Message/Message';
 import TweetDetail from '~/pages/TweetDetail/TweetDetail';
+import Notifications from '~/pages/Notifications/Notifications';
+import Bookmarks from '~/pages/Bookmarks/Bookmarks';
 
 export const publicRoutes = [
     { path: '/auth/register', component: Register },
@@ -14,7 +16,9 @@ export const publicRoutes = [
 ];
 export const privateRoutes = [
     { path: '/', component: Home },
+    { path: '/notifications', component: Notifications },
     { path: '/messages', component: Message },
+    { path: '/bookmarks', component: Bookmarks },
     { path: '/admin/users', component: AdminUserDashboard },
     {
         path: '/profile/:id',

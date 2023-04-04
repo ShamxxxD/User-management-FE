@@ -1,31 +1,34 @@
-import { ContainerOutlined, PieChartOutlined, DesktopOutlined } from '@ant-design/icons';
+import '~/scss/components/_menu.scss';
+import { UserOutlined, HomeOutlined, MessageOutlined, BellOutlined, BookOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const HeaderMenu = ({ user }) => {
-    function getItem(label, key, icon, children, type) {
-        return {
-            key,
-            icon,
-            children,
-            label,
-            type,
-        };
-    }
-    const items = [
-        getItem(<NavLink to='/'>Home</NavLink>, '1', <PieChartOutlined />),
-        getItem(<NavLink to='/messages'>Messages </NavLink>, '2', <DesktopOutlined />),
-        getItem(<NavLink to={`/profile/${user._id}`}>Profile</NavLink>, '3', <ContainerOutlined />),
-    ];
     return (
-        <Menu
-            className='header-menu'
-            defaultSelectedKeys={['1']}
-            mode='inline'
-            theme='light'
-            items={items}
-            style={{ borderInlineEnd: 'none' }}
-        />
+    
+
+        <nav className='header-menu'>
+            <NavLink className='menu-item' to='/'>
+                <HomeOutlined />
+                <span className='menu-item-text'>Home</span>
+            </NavLink>
+
+            <NavLink className='menu-item' to='/notifications'>
+                <BellOutlined /> <span className='menu-item-text'>Notifications</span>
+            </NavLink>
+
+            <NavLink className='menu-item' to='/messages'>
+                <MessageOutlined /> <span className='menu-item-text'>Messages</span>
+            </NavLink>
+
+            <NavLink className='menu-item' to='/bookmarks'>
+                <BookOutlined /> <span className='menu-item-text'>Bookmarks</span>
+            </NavLink>
+
+            <NavLink className='menu-item' to={`/profile/${user._id}`}>
+                <UserOutlined /> <span className='menu-item-text'>Profile</span>
+            </NavLink>
+        </nav>
     );
 };
 export default HeaderMenu;

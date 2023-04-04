@@ -61,20 +61,20 @@ function FriendRequestList() {
                          (
                             <Button
                                 type='primary'
-                                disabled={acceptedId?.includes(item.user._id) || rejectedId?.includes(item.user._id) ? true : false}
+                                disabled={(acceptedId.length > 0  && acceptedId?.includes(item.user._id))|| (rejectedId.length>0 && rejectedId?.includes(item.user._id) )? true : false}
                                 onClick={() => handleAcceptFriend(item)}
                             >
-                                {acceptedId?.includes(item.user._id) ? 'Accepted' : 'Accept'}
+                                {(acceptedId.length > 0  && acceptedId?.includes(item.user._id)) ? 'Accepted' : 'Accept'}
                             </Button>
                         ),
 
                          (
                             <Button
                                 danger
-                                disabled={rejectedId?.includes(item.user._id) || acceptedId?.includes(item.user._id)  ? true : false}
+                                disabled={(acceptedId.length > 0  && acceptedId?.includes(item.user._id))|| (rejectedId.length>0 && rejectedId?.includes(item.user._id) )? true : false}
                                 onClick={() => handleRejectFriend(item)}
                             >
-                                {rejectedId?.includes(item.user._id) ? 'Removed' : 'Remove'}
+                                { (rejectedId.length>0 && rejectedId?.includes(item.user._id)) ? 'Removed' : 'Remove'}
                             </Button>
                         ),
                     ]}

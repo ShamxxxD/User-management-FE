@@ -51,9 +51,9 @@ function InputNewPost({ user, onGetPosts }) {
             return false;
         }
 
-        const isLt2M = file.size / 1024 / 1024 < 0.2;
+        const isLt2M = file.size / 1024 / 1024 < 1;
         if (!isLt2M) {
-            message.error('Image must smaller than 200kb!');
+            message.error('Image must smaller than 1Mb!');
             return false;
         }
     };
@@ -70,7 +70,6 @@ function InputNewPost({ user, onGetPosts }) {
     };
 
     const uploadTweet = async () => {
-        console.log('tweetImage :', tweetImage);
         const data = {
             content: tweetContent,
             author: user._id,
@@ -87,7 +86,6 @@ function InputNewPost({ user, onGetPosts }) {
             onGetPosts();
             setTweetContent('');
             setTweetImagePreview('');
-            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -115,6 +113,7 @@ function InputNewPost({ user, onGetPosts }) {
             {tweetImagePreview && (
                 <Row>
                     <Col span={24}>
+                        <Button>123</Button>
                         <Image
                             preview={false}
                             src={tweetImagePreview.preview}

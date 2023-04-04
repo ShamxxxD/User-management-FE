@@ -106,12 +106,13 @@ function Profile() {
             label: `Friends`,
             children: <FriendList />,
         },
-        {
+        state.user._id === id && {
             key: '3',
             label: `Friends request`,
             children: <FriendRequestList />,
         },
     ];
+
 
     return (
         <MainLayout>

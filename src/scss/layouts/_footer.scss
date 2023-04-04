@@ -1,11 +1,12 @@
 @import '../base/variables';
+@import '../base/mixins';
 
 .footer{
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 1000000000;
+    z-index: 100;
     
     display: flex;
     justify-content: space-around;
@@ -15,5 +16,9 @@
     box-shadow: 0 0 5px 0 #ccc;
     color: $white-color;
 
-    height: 4rem;
+    height: 5rem;
+
+    @include Responsive(MD) {
+        display: none;
+    }
 }

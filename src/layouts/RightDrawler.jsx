@@ -19,7 +19,7 @@ const RightDrawler = () => {
                     <MenuUnfoldOutlined />
                 </div>
             </Space>
-            <Drawer placement={'right'} closable={false} onClose={onClose} open={open}>
+            <Drawer placement={'right'}  width='32rem'   closable={true} onClose={onClose} open={open}>
                 <RightSidebar />
             </Drawer>
         </>

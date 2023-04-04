@@ -10,6 +10,10 @@ import { Link } from 'react-router-dom';
 import Title from 'antd/es/typography/Title';
 import { useStore } from '~/store';
 
+import {
+    TwitterTimelineEmbed,
+} from 'react-twitter-embed';
+
 function RightSidebar() {
     // Call api lấy users và lưu vào peoples
     const [peoples, setPeoples] = useState([]);
@@ -138,30 +142,28 @@ function RightSidebar() {
         }
     }, 500);
 
-    const handleRemove =  (data) => {
-          const newPeople = peoples.filter (item => item._id !== data._id)
-            setPeoples(newPeople)
+    const handleRemove = data => {
+        const newPeople = peoples.filter(item => item._id !== data._id);
+        setPeoples(newPeople);
     };
 
     return (
         <div className='right-sidebar'>
-            <Row>
+            <Row className='right-sidebar-search'>
                 <Col span={24}>
                     <Search
                         onMouseEnter={() => {
                             setShowSearchPopper(true);
                         }}
-                        style={{ marginBottom: '1rem' }}    
+                        style={{ marginBottom: '1rem' }}
                         size='large'
                         placeholder='Find people...'
                         allowClear
                         onChange={handleChangeInputSearch}
                     />
-                    <Title style={{ textAlign: 'center' }} level={3}>
-                        People you may know
-                    </Title>
+            
                     {showSearchPopper && (
-                        <div className='search-popper' onMouseLeave={() =>setShowSearchPopper(false) }>
+                        <div className='search-popper' onMouseLeave={() => setShowSearchPopper(false)}>
                             {Array.isArray(searchResult) && searchResult.length > 0 && (
                                 <List
                                     itemLayout='horizontal'
@@ -188,7 +190,7 @@ function RightSidebar() {
                     )}
                 </Col>
             </Row>
-            <Row className='peoples'>
+            {/* <Row className='peoples'>
                 <Col span={24}>
                     <List
                         className='demo-loadmore-list'
@@ -204,6 +206,12 @@ function RightSidebar() {
                             </List.Item>
                         )}
                     />
+                </Col>
+            </Row> */}
+
+            <Row className='twitter-embed'>
+                <Col span={24}>
+                    <TwitterTimelineEmbed sourceType='profile' screenName='realDonaldTrump'  options={{height:1000}}/>
                 </Col>
             </Row>
         </div>

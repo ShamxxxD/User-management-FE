@@ -23,6 +23,10 @@ function Login() {
                                 </Title>
                                 <LoginForm />
                             </div>
+
+                            <div className='account'>
+                               Admin user: admin <br/> Password: 123123
+                            </div>
                             <div className='login-recommend'>
                                 You don't have account? <Link to='/auth/register'> Sign up now </Link>
                             </div>

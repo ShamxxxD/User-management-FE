@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import '~/scss/pages/_tweetDetail.scss';
-import { ArrowLeftOutlined, EllipsisOutlined } from '@ant-design/icons';
+import {  EllipsisOutlined } from '@ant-design/icons';
 import PageTitle from '~/components/UI/PageTitle';
 import MainLayout from '~/layouts/MainLayout';
 import {
@@ -23,7 +23,7 @@ import { HeartOutlined, CommentOutlined, HeartFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { deleteRequest, getRequest, patchRequest, postRequest } from '~/utils/axiosInstance';
 import RightSidebar from '~/components/UI/RightSidebar';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { useStore } from '~/store';
@@ -37,13 +37,12 @@ function TweetDetail() {
     const [state, dispatch] = useStore();
     const currentUserId = state.user._id;
 
-    const navigate = useNavigate();
     const params = useParams();
     const { id } = params;
 
-    const [post, setPost] = useState();
-    const [likes, setLikes] = useState();
-    const [isLiked, setIsLike] = useState(() => post?.likes?.includes(currentUserId));
+    const [post, setPost] = useState({});
+    const [likes, setLikes] = useState([]);
+    const [isLiked, setIsLike] = useState(false);
 
     const [comments, setComments] = useState([]);
     const [totalComments, setTotalComments] = useState(0);
@@ -54,6 +53,13 @@ function TweetDetail() {
     const [listItemValues, setListItemValues] = useState({});
 
     const [showEdit, setShowEdit] = useState(false);
+
+    useEffect(() => {
+        if (post?.likes?.includes(currentUserId)) {
+            setLikes(post?.likes.length);
+            setIsLike(true);
+        }
+    }, [post]);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -116,9 +122,6 @@ function TweetDetail() {
             setComments(NewComments);
             commentForm.setFieldsValue({ comment: null });
         }
-    };
-    const goPreviousUrl = () => {
-        navigate(-1);
     };
 
     const handleEditComment = async values => {
@@ -198,14 +201,7 @@ function TweetDetail() {
                         }}
                     >
                         <Col span={24}>
-                            <Row align='middle'>
-                                <Col xs={{ push: 1, span: 3 }}>
-                                    <Button onClick={goPreviousUrl} icon={<ArrowLeftOutlined />}></Button>
-                                </Col>
-                                <Col xs={{ push: 0, span: 20 }}>
-                                    <PageTitle>Tweet</PageTitle>
-                                </Col>
-                            </Row>
+                            <PageTitle>Tweet</PageTitle>
                         </Col>
                     </Row>
 
@@ -214,7 +210,7 @@ function TweetDetail() {
                             <Row className='tweet-author'>
                                 <Col>
                                     <Space>
-                                        <Avatar src={post?.author.avatar} alt='avatar' size={50} />
+                                        <Avatar src={post?.author?.avatar} alt='avatar' size={50} />
 
                                         <Space size='small'>
                                             <Link to='/profile'>{post?.author?.displayName}</Link>
@@ -234,7 +230,7 @@ function TweetDetail() {
                                     {post?.image && (
                                         <Image
                                             width='100%'
-                                            preview={false}
+                                            preview={true}
                                             src={post?.image}
                                             style={{
                                                 width: '100%',
@@ -252,19 +248,16 @@ function TweetDetail() {
                                     <Space size='large'>
                                         <div className='tweet-icon'>
                                             <Row align='middle'>
-                                                <Col >
+                                                <Col>
                                                     <CommentOutlined className='comment-icon' />
                                                 </Col>
 
-                                                <Col >
+                                                <Col>
                                                     <span>
-                                                        {totalComments > 0
-                                                            ? `${totalComments} comments`
-                                                            : null}
+                                                        {totalComments > 0 ? `${totalComments} comments` : null}
                                                     </span>
                                                 </Col>
                                             </Row>
-                                          
                                         </div>
                                         <div className='tweet-icon'>
                                             {isLiked ? (
@@ -357,7 +350,7 @@ function TweetDetail() {
                                             </Button>
                                         ))}
 
-                                    <Form onFinish={handleSendComment} form={commentForm}>
+                                    <Form onFinish={handleSendComment} form={commentForm} style={{ marginTop: '1rem' }}>
                                         <Form.Item name='comment'>
                                             <TextArea
                                                 showCount
